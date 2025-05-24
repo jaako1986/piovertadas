@@ -1,121 +1,38 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Bitácora Scout</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta charset="UTF-8">
+    <title>Galería Scout</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-<header class="encabezado">
-  <div class="logo-container">
-     <img src="{{ url_for('static', filename='backgrounds/escudo.png') }}" alt="escudogrupo" class="logo">
-  </div>
+    <header>
+        <div class="logo-container">
+            <img src="{{ url_for('static', filename='logo.png') }}" class="logo" alt="Logo Scout">
+        </div>
+        <div class="titulo-container">
+            <h1>PIOVERTADAS</h1>
+        </div>
+    </header>
 
-  <div class="titulo-container">
-    <h1 class="titulo">PIOVERTADAS</h1>
-  </div>
+    <div class="layout">
+        <main class="galeria-grid">
+            {% for imagen in imagenes %}
+            <div class="foto">
+                <img src="{{ url_for('static', filename=imagen) }}" alt="imagen scout">
+            </div>
+            {% endfor %}
+        </main>
 
-  <div class="logo-container">
-   <img src="{{ url_for('static', filename='backgrounds/logopromesa.png') }}" alt="logopromesado" class="logo">
-  </div>
-</header>
-
-<h2>Diversión y Aprendizaje</h2>
-<div class="contenedor-flex">
- <!--
-div class="carrusel">
-  <button class="anterior">←</button>
-  <div class="carrusel-contenedor">
-    <div class="slide activa">
-      <img src="{{ url_for('static', filename='fotos/foto1.jpg') }}" alt="">
+        <aside class="enlace-cajon">
+            <h3>🔗 Enlaces Útiles</h3>
+            <ul>
+                <li><a href="/">🏠 Inicio</a></li>
+                <li><a href="/actividades">📅 Actividades</a></li>
+                <li><a href="https://www.instagram.com/pioverscr" target="_blank">📸 Instagram Piovers</a></li>
+            </ul>
+        </aside>
     </div>
-    <div class="slide">
-      <img src="{{ url_for('static', filename='fotos/foto2.jpg') }}" alt="">
-    </div>
-    <div class="slide">
-      <img src="{{ url_for('static', filename='fotos/foto3.jpg') }}" alt="">
-    </div>
-    <div class="slide">
-      <img src="{{ url_for('static', filename='fotos/foto4.jpg') }}" alt="">
-    </div>
-    <div class="slide">
-      <img src="{{ url_for('static', filename='fotos/foto8.jpg') }}" alt="">
-    </div>
-  </div>
-  <button class="siguiente">→</button>
-</div>
-<div class="controles-carrusel">
-  <button class="anterior">←</button>
-  <button class="siguiente">→</button>
-</div>#
-previo carrusel--> 
-<div class="carrusel-contenedor">
-  {% for imagen in imagenes %}
-    <div class="slide {% if loop.first %}activa{% endif %}">
-      <img src="{{ url_for('static', filename=imagen) }}" alt="imagen">
-    </div>
-  {% endfor %}
-</div>
-
-<div class="carrusel-controles">
-  <button class="anterior">←</button>
-  <button class="siguiente">→</button>
-</div>
-
-
-  <div class="enlace-cajon">
-    <h3>🔗 Enlaces Útiles</h3>
-    <ul>
-      <li><a href="/">🏠 Inicio</a></li>
-      <li><a href="/galeria">📷 Galería</a></li>
-      <li><a href="/actividades">📅 Actividades</a></li>
-    </ul>
-
-    <h3>📲 Seguinos en redes</h3>
-    <ul>
-      <li><a href="https://www.instagram.com/piovers_cr" target="_blank">📸 Instagram Piovers</a></li>
-      <li><a href="https://www.facebook.com/profile.php?id=61556018938393" target="_blank">📘 Facebook Grupo</a></li>
-      <li><a href="https://www.instagram.com/scoutsaeronavalesislasmalvinas" target="_blank">📸 Instagram Grupo</a></li>
-    </ul>
-  </div>
-</div>
-
-
-<div class="Entrada-Blog">
-    <h3>Bienvenidos</h3>
-    <p class="fecha">18 De Mayo de 2025</p>
-    <p>Esto es el comienzo de algo que, espero, se mantenga vivo en el tiempo. Este espacio es para todo lo que se necesite, dejar alguna historia, vender algo, organizar algun evento, etc.
-    La idea es que tengan una herramienta digital que no se pierda, y que les de la posibilidad de expandir su alcance hacia la sociedad.
-    Espero que sepan y puedan darle un buen uso, y que puedan adquirir un nuevo conocimiento que los ayude en el futuro. <br><strong>SERVIR!</strong><br/>
-    </p>
-</div>
-
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-  let indice = 0;
-  const slides = document.querySelectorAll(".slide");
-
-  function mostrarSlide(i) {
-    slides.forEach((slide, index) => {
-      slide.classList.remove("activa");
-      if (index === i) {
-        slide.classList.add("activa");
-      }
-    });
-  }
-
-  function moverCarrusel(direccion) {
-    indice += direccion;
-    if (indice < 0) indice = slides.length - 1;
-    if (indice >= slides.length) indice = 0;
-    mostrarSlide(indice);
-  }
-
-  document.querySelector(".anterior").addEventListener("click", () => moverCarrusel(-1));
-  document.querySelector(".siguiente").addEventListener("click", () => moverCarrusel(1));
-
-  mostrarSlide(indice);
-});
-</script>
 </body>
 </html>
