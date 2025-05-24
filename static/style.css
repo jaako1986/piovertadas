@@ -96,9 +96,11 @@ h2 {
   opacity: 0;
   transition: opacity 0.5s ease-in-out;
   width: 100%;
-  height: auto;
+  height: 100%;  /* ✅ Esto le da altura al contenedor */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-
 .slide img {
   width: 100%;
   height: auto;
