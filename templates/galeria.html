@@ -1,0 +1,47 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Galería Scout</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header class="encabezado">
+  <div class="logo-container">
+     <img src="{{ url_for('static', filename='backgrounds/escudo.png') }}" alt="escudogrupo" class="logo">
+  </div>
+
+  <div class="titulo-container">
+    <h1 class="titulo">PIOVERTADAS</h1>
+  </div>
+
+  <div class="logo-container">
+   <img src="{{ url_for('static', filename='backgrounds/logopromesa.png') }}" alt="logopromesado" class="logo">
+  </div>
+</header>
+
+<h2>📷 Galería Scout</h2>
+
+<div class="layout">
+  <main class="galeria-grid">
+      {% for imagen in imagenes %}
+      <div class="foto">
+          <img src="{{ url_for('static', filename=imagen) }}" alt="imagen scout">
+      </div>
+      {% endfor %}
+  </main>
+
+  <div class="enlace-cajon">
+    <h3>🔗 Enlaces Útiles</h3>
+    <ul>
+      <li><a href="/">🏠 Inicio</a></li>
+      <li><a href="/galeria">📷 Galería</a></li>
+      <li><a href="https://www.instagram.com/pioverscr" target="_blank">📸 Instagram Piovers</a></li>
+      <li><a href="https://www.facebook.com/groups/aeronavales" target="_blank">📘 Facebook Grupo</a></li>
+      <li><a href="https://www.instagram.com/grupo8malvinas" target="_blank">📸 Instagram Grupo</a></li>
+    </ul>
+  </div>
+</div>
+</body>
+</html>
