@@ -14,8 +14,8 @@ body::before {
   background-image: url("backgrounds/fondo-scout.jpg");
   background-repeat: no-repeat;
   background-position: center;
-  background-size: contain;
-  opacity: 0.08; /* Marca de agua suave */
+  background-size: cover;
+  opacity: 0.1; /* Marca de agua suave */
   position: fixed;
   top: 0;
   left: 0;
@@ -81,8 +81,9 @@ h2 {
 }
 
 .carrusel-contenedor {
-  width: 320px;
-  height: 200px;
+  width: 100%;
+  max-width: 600px;
+  height: auto;
   overflow: hidden;
   position: relative;
 }
