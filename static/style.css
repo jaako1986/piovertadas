@@ -86,7 +86,7 @@ h2 {
 .carrusel-contenedor {
   width: 100%;
   max-width: 900px;
-  height: auto;
+  height: 500px;
   overflow: hidden;
   position: relative;
 }
