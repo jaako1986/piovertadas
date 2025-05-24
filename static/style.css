@@ -1,13 +1,10 @@
+
 /* ======= ESTILOS GENERALES ======= */
 body {
   font-family: 'ScoutKind', sans-serif;
-  background-color: #f4f4f4;
+  background-color: #fdfdfd;
   margin: 0;
   padding: 0;
-    background-color: #fdfdfd; /* o el color que prefieras */
-  margin: 0;
-  font-family: sans-serif;
-  
 }
 body::before {
   content: "";
@@ -15,7 +12,7 @@ body::before {
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  opacity: 0.1; /* Marca de agua suave */
+  opacity: 0.08;
   position: fixed;
   top: 0;
   left: 0;
@@ -72,17 +69,23 @@ h2 {
 }
 
 /* ======= CARRUSEL ======= */
-.carrusel {
+.contenedor-flex {
   display: flex;
-  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: flex-start;
   justify-content: center;
-  gap: 10px;
-  margin: 20px auto;
+  margin-bottom: 40px;
+}
+
+.carrusel {
+  flex: 1 1 600px;
+  max-width: 100%;
 }
 
 .carrusel-contenedor {
   width: 100%;
-  max-width: 600px;
+  max-width: 900px;
   height: auto;
   overflow: hidden;
   position: relative;
@@ -93,13 +96,13 @@ h2 {
   opacity: 0;
   transition: opacity 0.5s ease-in-out;
   width: 100%;
-  height: 100%;
+  height: auto;
 }
 
 .slide img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
+  object-fit: contain;
   border-radius: 8px;
 }
 
@@ -117,7 +120,6 @@ h2 {
   border-radius: 4px;
 }
 
-
 /* ======= FUENTES PERSONALIZADAS ======= */
 @font-face {
   font-family: 'ScoutRoughMiFuente';
@@ -131,14 +133,14 @@ h2 {
 
 /* ======= CAJON DE ENLACES======= */
 .enlace-cajon {
+  flex: 0 0 250px;
   background-color: #f2f2f2;
   border: 2px solid #ccc;
   border-radius: 8px;
   padding: 16px;
-  width: 300px;
-  margin: 20px auto;
   font-family: sans-serif;
   box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+  margin: 20px auto;
 }
 
 .enlace-cajon h3 {
@@ -166,26 +168,13 @@ h2 {
 .enlace-cajon a:hover {
   text-decoration: underline;
 }
-.contenedor-flex {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  align-items: flex-start;
-  justify-content: center;
-  margin-bottom: 40px;
-}
 
-.carrusel {
-  flex: 1 1 600px;
-  max-width: 800px;
-}
-
-.enlace-cajon {
-  flex: 0 0 250px;
-  background-color: #f2f2f2;
-  border: 2px solid #ccc;
-  border-radius: 8px;
-  padding: 16px;
-  font-family: sans-serif;
-  box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+/* ======= RESPONSIVE ======= */
+@media (max-width: 768px) {
+  .carrusel-contenedor {
+    max-width: 100%;
+  }
+  .slide img {
+    max-height: 300px;
+  }
 }
