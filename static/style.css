@@ -10,7 +10,7 @@ body {
   background-position: center center;
   background-attachment: fixed;
   background-size: cover;
-  opacity: 1;
+  opacity: 0;
   
 }
 body::before {
