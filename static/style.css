@@ -7,8 +7,8 @@ body {
   background-image: url('backgrounds/fondo-scout.jpg');
   background-size: cover;
   background-attachment: fixed;
-  background-position: center;
-  
+  background-position: center; 
+  opacity: 0.12; 
 }
 
 h1, h2, h3 {
@@ -20,7 +20,7 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(209, 232, 240, 0.724);
 }
 
 .logo-container {
@@ -40,7 +40,7 @@ header {
 }
 
 h2 {
-  background-color: rgba(255, 0, 0, 0.3);
+  background-color: rgba(255, 0, 0, 0.893);
   padding: 10px;
   font-family: 'MiFuente2', sans-serif;
 }
@@ -203,4 +203,18 @@ h2 {
 .foto:hover img {
   transform: scale(1.08);
   filter: brightness(1.1);
+}
+body::before {
+  content: "";
+  background-image: url("backgrounds/fondo-scout.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  opacity: 0.08;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
 }
