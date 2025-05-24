@@ -4,13 +4,9 @@ body {
   background-color: #f4f4f4;
   margin: 0;
   padding: 0;
-  background-image: url('backgrounds/fondo-scout.jpg');
-
-    background-repeat: no-repeat;
-  background-position: center center;
-  background-attachment: fixed;
-  background-size: cover;
-  opacity: 1;
+    background-color: #fdfdfd; /* o el color que prefieras */
+  margin: 0;
+  font-family: sans-serif;
   
 }
 body::before {
