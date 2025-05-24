@@ -22,8 +22,8 @@
 
 <h2>Diversión y Aprendizaje</h2>
 <div class="contenedor-flex">
-  
-<div class="carrusel">
+ <!--
+div class="carrusel">
   <button class="anterior">←</button>
   <div class="carrusel-contenedor">
     <div class="slide activa">
@@ -44,6 +44,23 @@
   </div>
   <button class="siguiente">→</button>
 </div>
+<div class="controles-carrusel">
+  <button class="anterior">←</button>
+  <button class="siguiente">→</button>
+</div>#
+previo carrusel--> 
+<div class="carrusel-contenedor">
+  {% for imagen in imagenes %}
+    <div class="slide {% if loop.first %}activa{% endif %}">
+      <img src="{{ url_for('static', filename=imagen) }}" alt="imagen">
+    </div>
+  {% endfor %}
+</div>
+
+<div class="carrusel-controles">
+  <button class="anterior">←</button>
+  <button class="siguiente">→</button>
+</div>
 
 
   <div class="enlace-cajon">
@@ -56,9 +73,9 @@
 
     <h3>📲 Seguinos en redes</h3>
     <ul>
-      <li><a href="https://www.instagram.com/pioverscr" target="_blank">📸 Instagram Piovers</a></li>
+      <li><a href="https://www.instagram.com/piovers_cr" target="_blank">📸 Instagram Piovers</a></li>
       <li><a href="https://www.facebook.com/profile.php?id=61556018938393" target="_blank">📘 Facebook Grupo</a></li>
-      <li><a href="https://www.instagram.com/scoutaeronavalesislasmalvinas" target="_blank">📸 Instagram Grupo</a></li>
+      <li><a href="https://www.instagram.com/scoutsaeronavalesislasmalvinas" target="_blank">📸 Instagram Grupo</a></li>
     </ul>
   </div>
 </div>
