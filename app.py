@@ -13,6 +13,12 @@ def galeria():
     imagenes = [f"fotos/{img}" for img in os.listdir(ruta) if img.endswith((".jpg", ".png", ".jpeg", ".webp"))]
     return render_template("galeria.html", imagenes=imagenes)
 
+@app.route("/material")
+def material():
+    archivos = os.listdir(os.path.join(app.static_folder, "material"))
+    pdfs = [f for f in archivos if f.endswith(".pdf")]
+    return render_template("material.html", pdfs=pdfs)
+
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(debug=True, host="0.0.0.0", port=port)
