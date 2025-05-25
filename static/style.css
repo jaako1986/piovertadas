@@ -47,8 +47,8 @@ header {
 }
 
 .logo-container {
-  width: 100px;
-  height: 100px;
+  width: 180px;
+  height: 180px;
 }
 
 .logo {
@@ -58,7 +58,7 @@ header {
 
 .titulo-container h1 {
   font-family: 'ScoutRoughMiFuente', sans-serif;
-  font-size: 60px;
+  font-size: 100px;
   margin: 0;
 }
 
@@ -70,14 +70,14 @@ h2 {
 
 /* ======= ENTRADA BLOG ======= */
 .Entrada-Blog {
-  background-color: rgba(73, 183, 217, 0.92);
+  background-color: rgba(73, 183, 217, 0.562);
   margin: 20px;
   padding: 20px;
   border-radius: 10px;
 }
 
 .fecha {
-  font-family: monospace;
+  font-family:monospace;
   color: #555;
 }
 
