@@ -66,7 +66,19 @@
     </ul>
   </div>
 </div>
-
+<div class="blog-contenedor">
+  {% for entrada in entradas %}
+    <div class="entrada-blog">
+      <h3>{{ entrada[11:-5].replace('-', ' ').capitalize() }}</h3>
+      <small>{{ entrada[0:10] }}</small>
+      <div class="contenido">
+        {% with open('static/entradas/' + entrada, 'r') as f %}
+          {{ f.read()|safe }}
+        {% endwith %}
+      </div>
+    </div>
+  {% endfor %}
+</div>
 
 <div class="Entrada-Blog">
     <h3>Bienvenidos</h3>

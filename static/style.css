@@ -279,3 +279,31 @@ h2 {
   box-shadow: 0 0 10px #000;
   cursor: pointer;
 }
+
+.blog-contenedor {
+  padding: 20px;
+  max-width: 800px;
+  margin: auto;
+}
+
+.entrada-blog {
+  background-color: #fff;
+  margin-bottom: 30px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.entrada-blog h3 {
+  margin-top: 0;
+}
+
+.entrada-blog small {
+  color: #666;
+}
+
+.entrada-blog img {
+  margin-top: 10px;
+  max-width: 100%;
+  border-radius: 8px;
+}

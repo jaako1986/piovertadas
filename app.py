@@ -5,7 +5,11 @@ app = Flask(__name__)
 
 @app.route('/')
 def inicio():
-    return render_template('index.html')
+    ruta = os.path.join(app.static_folder, "entradas")
+    if not os.path.exists(ruta):
+        os.makedirs(ruta)
+    entradas = sorted(os.listdir(ruta), reverse=True)
+    return render_template("index.html", entradas=entradas)
 
 @app.route("/galeria")
 def galeria():
@@ -18,6 +22,9 @@ def material():
     archivos = os.listdir(os.path.join(app.static_folder, "material"))
     pdfs = [f for f in archivos if f.endswith(".pdf")]
     return render_template("material.html", pdfs=pdfs)
+
+
+
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
