@@ -30,10 +30,10 @@
 <div class="layout">
   <main class="galeria-grid">
       {% for imagen in imagenes %}
-      <div class="foto">
-          <img src="{{ url_for('static', filename=imagen) }}" alt="imagen scout">
-      </div>
-      {% endfor %}
+  <div class="foto">
+    <img src="{{ url_for('static', filename=imagen) }}" alt="imagen scout" onclick="mostrarImagen(this.src)">
+  </div>
+{% endfor %}
   </main>
 
   <div class="enlace-cajon">
@@ -47,5 +47,20 @@
     </ul>
   </div>
 </div>
+<!-- Visor ampliado -->
+<div id="visor" onclick="cerrarImagen()">
+  <img id="imagen-grande" src="">
+</div>
+
+<script>
+function mostrarImagen(src) {
+  document.getElementById("imagen-grande").src = src;
+  document.getElementById("visor").style.display = "flex";
+}
+function cerrarImagen() {
+  document.getElementById("visor").style.display = "none";
+}
+</script>
+
 </body>
 </html>
