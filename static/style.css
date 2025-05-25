@@ -1,47 +1,59 @@
-
-.enlace-cajon {
-  position: fixed;
-  top: 150px;
-  right: 30px;
-  width: 200px;
-  padding: 0;
-  border: none;
-  background: none;
-  box-shadow: none;
-  z-index: 999;
-}
-
-.enlace-cajon ul {
-  list-style: disc;
-  padding-left: 20px;
-  margin: 0;
-}
-
-.enlace-cajon li {
-  text-align: left;
-  margin: 6px 0;
-}
-
-.enlace-cajon a {
-  color: #004b8d;
-  text-decoration: none;
-}
-
-.enlace-cajon a:hover {
-  text-decoration: underline;
-}
-
-/* Mantengo otros estilos útiles */
+/* ======= ESTILOS GENERALES ======= */
 body {
   font-family: 'ScoutKind', sans-serif;
   background-color: #f4f4f4;
   margin: 0;
   padding: 0;
+  /*background-image: url('backgrounds/fondo-scout.jpg');*/
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;  
+}
+body::before {
+  content: "";
+  background-image: url("backgrounds/fondo-scout.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -2;
 }
 
-.titulo a {
-  text-decoration: none;
-  color: inherit;
+body::after {
+  content: "";
+  background-color: rgba(255, 255, 255, 0.6); /* capa blanca semitransparente */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+}
+
+h1, h2, h3 {
+  text-align: center;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: rgba(209, 232, 240, 0.724);
+}
+
+.logo-container {
+  width: 180px;
+  height: 180px;
+}
+
+.logo {
+  width: 100%;
+  height: auto;
 }
 
 .titulo-container {
@@ -50,7 +62,259 @@ body {
 }
 
 .titulo {
+  font-family: 'ScoutRoughMiFuente', sans-serif;
   font-size: 60px;
   margin: 0;
   transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.titulo a {
+  text-decoration: none;
+  color: inherit;
+  transition: inherit;
+}
+
+.titulo a:hover {
+  color: #0055aa;
+  text-shadow: 0 0 5px rgba(0, 85, 170, 0.4);
+}
+
+
+h2 {
+  background-color: rgba(255, 0, 0, 0.893);
+  padding: 10px;
+  font-family: 'MiFuente2', sans-serif;
+}
+
+/* ======= ENTRADA BLOG ======= */
+.Entrada-Blog {
+  background-color: rgba(73, 183, 217, 0.562);
+  margin: 20px;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.fecha {
+  font-family:monospace;
+  color: #555;
+}
+
+/* ======= CARRUSEL ======= */
+.carrusel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 20px auto;
+}
+
+.carrusel-contenedor {
+  width: 320px;
+  height: 200px;
+  overflow: hidden;
+  position: relative;
+}
+
+.slide {
+  position: absolute;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+  width: 100%;
+  height: 100%;
+}
+
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.slide.activa {
+  opacity: 1;
+}
+
+.anterior,
+.siguiente {
+  font-size: 1.5rem;
+  padding: 5px 10px;
+  cursor: pointer;
+  background-color: rgba(255,255,255,0.6);
+  border: none;
+  border-radius: 4px;
+}
+
+/* ======= FUENTES PERSONALIZADAS ======= */
+@font-face {
+  font-family: 'ScoutRoughMiFuente';
+  src: url('fonts/WoodWorks-Regular.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'MiFuente2';
+  src: url('fonts/ScoutKind.otf') format('opentype');
+}
+
+/* ======= CAJON DE ENLACES======= */
+.enlace-cajon {
+  background-color: #f2f2f2;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  padding: 16px;
+  width: 300px;
+  margin: 20px auto;
+  font-family: sans-serif;
+  box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+}
+
+.enlace-cajon h3 {
+  margin-top: 0;
+  font-size: 18px;
+  text-align: center;
+}
+
+.enlace-cajon ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.enlace-cajon li {
+  margin: 8px 0;
+  text-align: center;
+}
+
+.enlace-cajon a {
+  text-decoration: none;
+  color: #0f141a;
+}
+
+.enlace-cajon a:hover {
+  text-decoration: underline;
+}
+.contenedor-flex {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: flex-start;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.carrusel {
+  flex: 1 1 600px;
+  max-width: 800px;
+}
+
+.enlace-cajon {
+  flex: 0 0 250px;
+  background-color: #0c1217fe;
+  border: 2px transparent #ccc;
+  border-radius: 8px;
+  padding: 16px;
+  font-family: sans-serif;
+  box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+  position: fixed;
+  top: 150px; /* altura desde el top de la pantalla */
+  right: 30px; /* o left: 30px si está del otro lado */
+  width: 200px;
+}
+
+
+.enlace-cajon a {
+  text-decoration: none;
+  color: inherit;
+  transition: inherit;
+}
+
+.galeria-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  flex: 2;
+  padding: 10px;
+}
+
+.foto {
+  overflow: hidden;
+  position: relative;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease-in-out;
+}
+
+.foto img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease-in-out, filter 0.3s ease;
+  cursor: pointer;
+}
+
+.foto:hover img {
+  transform: scale(1.08);
+  filter: brightness(1.1);
+}
+.foto img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  transition: transform 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.foto:hover img {
+  transform: scale(1.05);
+  filter: brightness(1.1);
+}
+
+/* Lightbox */
+#visor {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.8);
+  justify-content: center;
+  align-items: center;
+}
+
+#visor img {
+  max-width: 90vw;
+  max-height: 90vh;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #000;
+  cursor: pointer;
+}
+
+.blog-contenedor {
+  padding: 20px;
+  max-width: 800px;
+  margin: auto;
+}
+
+.entrada-blog {
+  background-color: #fff;
+  margin-bottom: 30px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.entrada-blog h3 {
+  margin-top: 0;
+}
+
+.entrada-blog small {
+  color: #666;
+}
+
+.entrada-blog img {
+  margin-top: 10px;
+  max-width: 100%;
+  border-radius: 8px;
 }
