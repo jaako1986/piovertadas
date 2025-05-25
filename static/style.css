@@ -7,10 +7,22 @@ body {
   background-image: url('backgrounds/fondo-scout.jpg');
   background-size: cover;
   background-attachment: fixed;
-  background-position: center; 
-  opacity: 0.12; 
+  background-position: center;  
 }
-
+body::before {
+  content: "";
+  background-image: url("backgrounds/fondo-scout.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  opacity: 0.08;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+}
 h1, h2, h3 {
   text-align: center;
 }
@@ -203,18 +215,4 @@ h2 {
 .foto:hover img {
   transform: scale(1.08);
   filter: brightness(1.1);
-}
-body::before {
-  content: "";
-  background-image: url("backgrounds/fondo-scout.jpg");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  opacity: 0.08;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: -1;
 }
