@@ -12,12 +12,9 @@
      <img src="{{ url_for('static', filename='backgrounds/escudo.png') }}" alt="escudogrupo" class="logo">
   </div>
 
-<div class="titulo-container">
-  <h1 class="titulo">
-    <a href="/">PIOVERTADAS</a>
-  </h1>
-</div>
-
+  <div class="titulo-container">
+    <h1 class="titulo">PIOVERTADAS</h1>
+  </div>
 
   <div class="logo-container">
    <img src="{{ url_for('static', filename='backgrounds/logopromesa.png') }}" alt="logopromesado" class="logo">
@@ -69,12 +66,10 @@
 <div class="blog-contenedor">
   {% for entrada in entradas %}
     <div class="entrada-blog">
-      <h3>{{ entrada[11:-5].replace('-', ' ').capitalize() }}</h3>
-      <small>{{ entrada[0:10] }}</small>
+      <h3>{{ entrada.titulo }}</h3>
+      <small>{{ entrada.fecha }}</small>
       <div class="contenido">
-        {% with open('static/entradas/' + entrada, 'r') as f %}
-          {{ f.read()|safe }}
-        {% endwith %}
+        {{ entrada.contenido | safe }}
       </div>
     </div>
   {% endfor %}

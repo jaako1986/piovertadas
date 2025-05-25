@@ -8,7 +8,16 @@ def inicio():
     ruta = os.path.join(app.static_folder, "entradas")
     if not os.path.exists(ruta):
         os.makedirs(ruta)
-    entradas = sorted(os.listdir(ruta), reverse=True)
+    entradas = []
+    for archivo in sorted(os.listdir(ruta), reverse=True):
+        if archivo.endswith(".html"):
+            with open(os.path.join(ruta, archivo), "r", encoding="utf-8") as f:
+                contenido = f.read()
+            entradas.append({
+                "titulo": archivo[11:-5].replace("-", " ").capitalize(),
+                "fecha": archivo[0:10],
+                "contenido": contenido
+            })
     return render_template("index.html", entradas=entradas)
 
 @app.route("/galeria")
@@ -22,9 +31,6 @@ def material():
     archivos = os.listdir(os.path.join(app.static_folder, "material"))
     pdfs = [f for f in archivos if f.endswith(".pdf")]
     return render_template("material.html", pdfs=pdfs)
-
-
-
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
