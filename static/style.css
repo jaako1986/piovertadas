@@ -209,13 +209,13 @@ h2 {
 .enlace-cajon {
   flex: 0 0 250px;
   background-color: transparent;
-  border: 2px transparent #ccc;
+  border: 2px transparent
   border-radius: 8px;
   padding: 16px;
   font-family: sans-serif;
   box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
   position: fixed;
-  top: 180px; /* altura desde el top de la pantalla */
+  top: 2000px; /* altura desde el top de la pantalla */
   right: 30px; /* o left: 30px si está del otro lado */
   width: 200px;
 }
