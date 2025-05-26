@@ -161,10 +161,10 @@ h2 {
 /* ==== CAJÓN DE ENLACES FLOTANTE Y LIMPIO ==== */
 .enlace-cajon {
   position: fixed;
-  top: 250px;
+  top: 220px;
   right: 30px;
   width: 200px;
-  max-height: 70vh; /* 👈 esto limita su altura */
+  max-height: 100vh; /* 👈 esto limita su altura */
   overflow-y: auto; /* 👈 si se pasa, aparece scroll */
   padding: 0;
   margin: 0;
@@ -306,17 +306,16 @@ h2 {
 
 .entrada-blog img {
   margin-top: 10px;
-  max-width: 30%;
+  max-width: 60%;
   border-radius: 8px;
 }
 
 
 .enlaces-redes {
   position: fixed;
-  top: 300px; /* Ajustás la altura que querés desde arriba */
+  top: 250px; /* Ajustás la altura que querés desde arriba */
   left: 30px;
-  width: 200px;
-  padding: 0;
+  padding: 30px;
   margin: 0;
   border: none;
   background: none;
