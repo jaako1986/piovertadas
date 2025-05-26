@@ -293,7 +293,7 @@ h2 {
 
 .entrada-blog {
   background-color: hsl(198, 81%, 74%);
-  background: transparent;
+  opacity: 20%;;
   margin-bottom: 30px;
   padding: 20px;
   border-radius: 10px;
@@ -348,4 +348,6 @@ h2 {
   flex: 1;
   min-width: 200px;
   font-family: 'letraBlog';
+  font-size: 12px;
+  font-style: bold;
 }
