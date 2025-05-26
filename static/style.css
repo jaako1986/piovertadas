@@ -293,7 +293,6 @@ h2 {
 
 .entrada-blog {
   background-color: hsl(198, 81%, 74%);
-  opacity: 20%;;
   margin-bottom: 30px;
   padding: 20px;
   border-radius: 10px;
@@ -335,6 +334,7 @@ h2 {
   gap: 20px;
   margin: 20px 0;
   flex-wrap: wrap;
+  opacity: 30%;
 }
 
 .entrada-con-imagen img {
@@ -342,6 +342,7 @@ h2 {
   height: auto;
   border-radius: 8px;
   flex-shrink: 0;
+  opacity: 100%;
 }
 
 .texto-entrada {
