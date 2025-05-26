@@ -155,6 +155,10 @@ h2 {
   font-family: 'MiFuente2';
   src: url('fonts/ScoutKind.otf') format('opentype');
 }
+@font-face {
+  font-family: 'letraBlog';
+  src: url('fonts/This-Notes.ttf') format('opentype');
+}
 
 /* ======= CAJON DE ENLACES======= */
 
@@ -342,4 +346,5 @@ h2 {
 .texto-entrada {
   flex: 1;
   min-width: 200px;
+  font-family: 'letraBlog';
 }
