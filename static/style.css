@@ -324,3 +324,22 @@ h2 {
   font-size: 20px;
   line-height: 1.6;
 }
+.entrada-con-imagen {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  margin: 20px 0;
+  flex-wrap: wrap;
+}
+
+.entrada-con-imagen img {
+  max-width: 250px;
+  height: auto;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.texto-entrada {
+  flex: 1;
+  min-width: 200px;
+}
