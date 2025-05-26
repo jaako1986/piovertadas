@@ -160,20 +160,20 @@ h2 {
 /* ==== CAJÓN DE ENLACES FLOTANTE Y LIMPIO ==== */
 .enlace-cajon {
   position: fixed;
-  top: 300px; /* Ajustás la altura que querés desde arriba */
+  top: 250px;
   right: 30px;
   width: 200px;
+  max-height: 70vh; /* 👈 esto limita su altura */
+  overflow-y: auto; /* 👈 si se pasa, aparece scroll */
   padding: 0;
   margin: 0;
   border: none;
   background: none;
   box-shadow: none;
   z-index: 999;
-  font-family: sans-serif;
   font-size: 16px;
   line-height: 1.6;
 }
-
 .enlace-cajon ul {
   list-style: none;
   padding-left: 0;
