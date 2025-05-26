@@ -317,12 +317,12 @@ h2 {
 
 .enlaces-redes {
   position: absolute;
-  top: 250px;
+  top: 220px;
   left: 30px;
   width: 180px;
   font-family: 'MiFuente2', sans-serif;
-  font-size: 18px;
-  line-height: 1.6;
+  font-size: 22px;
+  line-height: 1.5;
   background: none;
   border: none;
   z-index: 999;
