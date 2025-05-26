@@ -312,7 +312,7 @@ h2 {
 
 .enlaces-redes {
   position: fixed;
-  top: 180px; /* Ajustás la altura que querés desde arriba */
+  top: 300px; /* Ajustás la altura que querés desde arriba */
   left: 30px;
   width: 200px;
   padding: 0;
