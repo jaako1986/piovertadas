@@ -292,6 +292,7 @@ h2 {
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  margin-right: 20px;
 }
 
 .entrada-blog h3 {
@@ -304,7 +305,7 @@ h2 {
 
 .entrada-blog img {
   margin-top: 10px;
-  max-width: 60%;
+  max-width: 30%;
   border-radius: 8px;
 }
 
