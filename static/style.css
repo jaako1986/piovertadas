@@ -160,22 +160,23 @@ h2 {
 /* ==== CAJÓN DE ENLACES FLOTANTE Y LIMPIO ==== */
 .enlace-cajon {
   position: fixed;
-  top: 200px;
+  top: 180px; /* Ajustás la altura que querés desde arriba */
   right: 30px;
-  width: 220px;
+  width: 200px;
   padding: 0;
   margin: 0;
   border: none;
   background: none;
   box-shadow: none;
   z-index: 999;
+  font-family: sans-serif;
   font-size: 16px;
   line-height: 1.6;
 }
 
 .enlace-cajon ul {
-  list-style: disc;
-  padding-left: 20px;
+  list-style: none;
+  padding-left: 0;
   margin: 0;
 }
 
@@ -185,13 +186,14 @@ h2 {
 }
 
 .enlace-cajon a {
-  color: #010d18;
+  color: #000; /* negro como pediste */
   text-decoration: none;
 }
 
 .enlace-cajon a:hover {
   text-decoration: underline;
 }
+
 
 .contenedor-flex {
   display: flex;
@@ -305,36 +307,5 @@ h2 {
   max-width: 100%;
   border-radius: 8px;
 }
-.enlace-cajon {
-  position: fixed;
-  top: 190px;
-  right: 30px;
-  width: 200px;
-  background: none;
-  border: none;
-  box-shadow: none;
-  padding: 0;
-  margin: 0;
-  z-index: 9999;
-  font-size: 16px;
-  line-height: 1.6;
-}
 
-.enlace-cajon ul {
-  list-style: none;
-  padding-left: 0;
-  margin: 0;
-}
 
-.enlace-cajon li {
-  margin-bottom: 10px;
-}
-
-.enlace-cajon a {
-  color: #004b8d;
-  text-decoration: none;
-}
-
-.enlace-cajon a:hover {
-  text-decoration: underline;
-}
