@@ -292,7 +292,7 @@ h2 {
 }
 
 .entrada-blog {
-  background-color: hsl(198, 81%, 74%);
+  background-color: rgb(135, 210, 242, 0.6);
   margin-bottom: 30px;
   padding: 20px;
   border-radius: 10px;
@@ -316,7 +316,7 @@ h2 {
 
 
 .enlaces-redes {
-  position: fixed;
+  position: absolute;
   top: 250px;
   left: 30px;
   width: 180px;
