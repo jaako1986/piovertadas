@@ -168,7 +168,7 @@ h2 {
   top: 220px;
   right: 30px;
   width: 200px;
-  max-height: 100vh; /* 👈 esto limita su altura */
+  max-height: 50vh; /* 👈 esto limita su altura */
   overflow-y: auto; /* 👈 si se pasa, aparece scroll */
   padding: 0;
   margin: 0;
@@ -176,7 +176,7 @@ h2 {
   background: none;
   box-shadow: none;
   z-index: 999;
-  font-size: 16px;
+  font-size: 20px;
   line-height: 1.6;
 }
 .enlace-cajon ul {
@@ -321,7 +321,7 @@ h2 {
   left: 30px;
   width: 180px;
   font-family: 'MiFuente2', sans-serif;
-  font-size: 22px;
+  font-size: 18px;
   line-height: 1.5;
   background: none;
   border: none;
