@@ -160,7 +160,7 @@ h2 {
 /* ==== CAJÓN DE ENLACES FLOTANTE Y LIMPIO ==== */
 .enlace-cajon {
   position: fixed;
-  top: 180px; /* Ajustás la altura que querés desde arriba */
+  top: 200px; /* Ajustás la altura que querés desde arriba */
   right: 30px;
   width: 200px;
   padding: 0;
