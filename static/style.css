@@ -77,18 +77,19 @@ header {
 .titulo a:hover {
   color: #0055aa;
   text-shadow: 0 0 5px rgba(0, 85, 170, 0.4);
+  zoom: 10%;
 }
 
 
 h2 {
-  background-color: rgba(255, 0, 0, 0.893);
-  padding: 10px;
+  background-color: hwb(0 2% 32%);
+  padding: 20px;
   font-family: 'MiFuente2', sans-serif;
 }
 
 /* ======= ENTRADA BLOG ======= */
 .Entrada-Blog {
-  background-color: rgba(73, 183, 217, 0.562);
+  background-color: rgba(88, 230, 237, 0.562);
   margin: 20px;
   padding: 20px;
   border-radius: 10px;
