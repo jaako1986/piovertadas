@@ -157,14 +157,14 @@ h2 {
 
 /* ======= CAJON DE ENLACES======= */
 .enlace-cajon {
-  background-color: #f2f2f2;
-  border: 2px solid #ccc;
+  background-color:none;
+  border: none;
   border-radius: 8px;
   padding: 16px;
   width: 300px;
   margin: 20px auto;
   font-family: sans-serif;
-  box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+  box-shadow: none;
 }
 
 .enlace-cajon h3 {
@@ -209,11 +209,12 @@ h2 {
 .enlace-cajon {
   flex: 0 0 250px;
   background-color: transparent;
-  border: 2px transparent
+  border: none
   border-radius: 8px;
   padding: 16px;
   font-family: sans-serif;
-  box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+  box-shadow: none;
+  
   position: fixed;
   top: 2000px; /* altura desde el top de la pantalla */
   right: 30px; /* o left: 30px si está del otro lado */
