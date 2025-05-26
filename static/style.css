@@ -317,16 +317,15 @@ h2 {
 
 .enlaces-redes {
   position: fixed;
+  top: 250px;
   left: 30px;
-  padding: 30px;
-  margin-top: 220px;
-  border: none;
-  background: none;
-  box-shadow: none;
-  z-index: 999;
-  font-family: 'MiFuente2';
-  font-size: 20px;
+  width: 180px;
+  font-family: 'MiFuente2', sans-serif;
+  font-size: 18px;
   line-height: 1.6;
+  background: none;
+  border: none;
+  z-index: 999;
 }
 .entrada-con-imagen {
   display: flex;
@@ -334,7 +333,6 @@ h2 {
   gap: 20px;
   margin: 20px 0;
   flex-wrap: wrap;
-  opacity: 30%;
 }
 
 .entrada-con-imagen img {
@@ -342,14 +340,13 @@ h2 {
   height: auto;
   border-radius: 8px;
   flex-shrink: 0;
-  opacity: 100%;
 }
 
 .texto-entrada {
   flex: 1;
   min-width: 200px;
   font-family: 'letraBlog';
-  font-size: 12px;
+  font-size: 18px;
   font-style: bold;
-  opacity: 100%;
+  
 }
