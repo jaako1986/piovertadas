@@ -157,7 +157,7 @@ h2 {
 }
 @font-face {
   font-family: 'letraBlog';
-  src: url('fonts/This-Notes.ttf') format('opentype');
+  src: url('fonts/Salting-Free.otf') format('opentype');
 }
 
 /* ======= CAJON DE ENLACES======= */
@@ -293,6 +293,7 @@ h2 {
 
 .entrada-blog {
   background-color: hsl(198, 81%, 74%);
+  background: transparent;
   margin-bottom: 30px;
   padding: 20px;
   border-radius: 10px;
