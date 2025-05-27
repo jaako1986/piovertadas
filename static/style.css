@@ -101,49 +101,7 @@ h2 {
 }
 
 /* ======= CARRUSEL ======= */
-.carrusel {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  margin: 20px auto;
-}
 
-.carrusel-contenedor {
-  width: 320px;
-  height: 200px;
-  overflow: hidden;
-  position: relative;
-}
-
-.slide {
-  position: absolute;
-  opacity: 0;
-  transition: opacity 0.5s ease-in-out;
-  width: 100%;
-  height: 100%;
-}
-
-.slide img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 8px;
-}
-
-.slide.activa {
-  opacity: 1;
-}
-
-.anterior,
-.siguiente {
-  font-size: 1.5rem;
-  padding: 5px 10px;
-  cursor: pointer;
-  background-color: rgba(255,255,255,0.6);
-  border: none;
-  border-radius: 4px;
-}
 
 /* ======= FUENTES PERSONALIZADAS ======= */
 @font-face {
@@ -160,7 +118,6 @@ h2 {
   src: url('fonts/Salting-Free.otf') format('opentype');
 }
 
-/* ======= CAJON DE ENLACES======= */
 
 /* ==== CAJÓN DE ENLACES FLOTANTE Y LIMPIO ==== */
 .enlace-cajon {
