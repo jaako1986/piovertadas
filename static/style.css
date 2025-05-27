@@ -164,6 +164,7 @@ h2 {
   align-items: flex-start;
   justify-content: center;
   margin-bottom: 40px;
+  max-width: 800px;
 }
 
 .carrusel {
