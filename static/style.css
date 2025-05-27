@@ -312,3 +312,17 @@ max-width: 40%;
 border-radius: 10px;
 box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
+.imagen-bienvenida {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 40px auto;
+  max-width: 1000px;
+}
+
+.imagen-bienvenida img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  display: block;
+}
