@@ -158,13 +158,12 @@ h2 {
 
 
 .contenedor-flex {
-  display: flex;
-  flex-wrap: wrap;
-margin: auto;
-  align-items: flex-start;
-  justify-content: center;
-  margin-bottom: 40px;
-  max-width: 600px;
+max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  display: block;
+  margin: auto;
+
 }
 
 
