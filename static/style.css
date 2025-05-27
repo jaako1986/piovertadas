@@ -160,17 +160,14 @@ h2 {
 .contenedor-flex {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
+margin: auto;
   align-items: flex-start;
   justify-content: center;
   margin-bottom: 40px;
-  max-width: 800px;
+  max-width: 600px;
 }
 
-.carrusel {
-  flex: 1 1 600px;
-  max-width: 800px;
-}
+
 
 
 .enlace-cajon a {
