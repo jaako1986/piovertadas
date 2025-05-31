@@ -173,6 +173,9 @@ max-width: 40%;
   text-decoration: none;
   color: inherit;
   transition: inherit;
+ height: auto;
+ width: auto;
+ font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .galeria-grid {
