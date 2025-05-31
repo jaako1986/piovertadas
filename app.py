@@ -29,8 +29,10 @@ def galeria():
 @app.route("/material")
 def material():
     archivos = os.listdir(os.path.join(app.static_folder, "material"))
-    pdfs = [f for f in archivos if f.endswith(".pdf",".pptx",".doc")]
-    return render_template("material.html", pdfs=pdfs)
+    formatos_validos = (".pdf", ".doc", ".docx", ".ppt", ".pptx", ".xls", ".xlsx")
+    materiales = [f for f in archivos if f.endswith(formatos_validos)]
+    return render_template("material.html", pdfs=materiales)
+
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
