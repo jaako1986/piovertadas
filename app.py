@@ -29,7 +29,7 @@ def galeria():
 @app.route("/material")
 def material():
     archivos = os.listdir(os.path.join(app.static_folder, "material"))
-    pdfs = [f for f in archivos if f.endswith(".pdf")]
+    pdfs = [f for f in archivos if f.endswith(".pdf",".pptx",".doc")]
     return render_template("material.html", pdfs=pdfs)
 
 if __name__ == "__main__":
