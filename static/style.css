@@ -115,7 +115,7 @@ h2 {
 }
 @font-face {
   font-family: 'letraBlog';
-  src: url('fonts/Salting-Free.otf') format('opentype');
+  src: url('fonts/This-Notes.ttf') format('opentype');
 }
 
 
@@ -325,4 +325,34 @@ box-shadow: 0 0 10px rgba(0,0,0,0.1);
   height: auto;
   border-radius: 10px;
   display: block;
+}
+.entrada-con-imagen {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.bloque {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+}
+
+.texto {
+  flex: 1 1 300px;
+}
+
+.imagenes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  flex: 1 1 300px;
+}
+
+.imagenes img {
+  width: 48%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 8px;
 }
