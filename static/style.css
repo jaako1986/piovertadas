@@ -332,6 +332,9 @@ box-shadow: 0 0 10px rgba(0,0,0,0.1);
   flex-wrap: wrap;
   align-items: center;
   gap: 1rem;
+   font-family: 'letraBlog';
+  font-size: 18px;
+  font-weight: bold;
 }
 
 
