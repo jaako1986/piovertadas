@@ -23,8 +23,12 @@
 </header>
 
 <h2>Diversión y Aprendizaje</h2>
-<div class="imagen-bienvenida">
-  <img src="/static/backgrounds/bandera-piover.jpeg" alt="Inicio Scout">
+<div class="bloque-mapa">
+  <div class="imagen-bandera">
+    <img src="/static/backgrounds/bandera-piover.jpeg" alt="Bandera Piovers">
+  </div>
+
+  <div id="mapa"></div>
 </div>
 
 
@@ -114,5 +118,21 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 </script>
 <script id="dsq-count-scr" src="//piovers-islas-malvinas.disqus.com/count.js" async></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<script>
+  var map = L.map('mapa').setView([-45.8662, -67.4827], 14);
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap | PIOVERTADAS',
+    maxZoom: 18
+  }).addTo(map);
+
+  L.marker([-45.8662, -67.4827]).addTo(map)
+    .bindPopup('<b>Grupo Scouts Aeronavales Islas Malvinas</b><br>Base VIII<br>Comodoro Rivadavia')
+    .openPopup();
+</script>
+
 </body>
 </html>

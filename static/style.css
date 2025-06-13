@@ -390,3 +390,31 @@ box-shadow: 0 0 10px rgba(0,0,0,0.1);
 .material-bibliografico a:hover {
   text-decoration: underline;
 }
+
+.bloque-mapa {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  margin: 40px auto;
+  max-width: 1000px;
+}
+
+.imagen-bandera {
+  flex: 1;
+  max-width: 400px;
+}
+
+.imagen-bandera img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+#mapa {
+  flex: 1;
+  height: 400px;
+  min-width: 300px;
+  border-radius: 10px;
+  overflow: hidden;
+}
