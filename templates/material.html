@@ -22,13 +22,15 @@
   </div>
 </header>
 
+
 <h2>📚 Material Bibliográfico</h2>
-<div class="enlace-cajon">
+<section class="material-bibliografico">
   <ul>
     {% for pdf in pdfs %}
       <li><a href="{{ url_for('static', filename='material/' + pdf) }}" download>{{ pdf }}</a></li>
     {% endfor %}
   </ul>
-</div>
+</section>
+
 </body>
 </html>
