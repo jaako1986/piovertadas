@@ -407,14 +407,16 @@ box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
 .imagen-bandera img {
-  width: 100%;
+  height: 280px;
+  object-fit: cover;
   border-radius: 10px;
 }
 
 #mapa {
-  flex: 1;
-  height: 400px;
-  min-width: 300px;
+  width: 100%;
+  max-width: 400px;
+  height: 280px;
   border-radius: 10px;
   overflow: hidden;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
 }
