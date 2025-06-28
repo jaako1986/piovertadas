@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Editar grupo</title>
+</head>
+<body style="font-family: sans-serif; background-color: #f1f1f1; padding: 20px;">
+  <h1 style="text-align: center; color: #0077b6;">Editar grupo</h1>
+  <form method="POST" style="background: #fff; padding: 20px; border-radius: 8px; max-width: 400px; margin: auto; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+    <label>Nombre:<br> <input type="text" name="nombre" value="{{ grupo.nombre }}" required style="width: 100%; padding: 8px; margin-bottom: 10px;"></label><br>
+    <label>Ciudad:<br> <input type="text" name="ciudad" value="{{ grupo.ciudad }}" required style="width: 100%; padding: 8px; margin-bottom: 10px;"></label><br>
+    <label>Provincia:<br> <input type="text" name="provincia" value="{{ grupo.provincia }}" required style="width: 100%; padding: 8px; margin-bottom: 10px;"></label><br>
+    <label>Contacto:<br> <input type="text" name="contacto" value="{{ grupo.contacto }}" required style="width: 100%; padding: 8px; margin-bottom: 10px;"></label><br>
+    <button type="submit" style="background-color: #0077b6; color: #fff; padding: 10px 15px; border: none; border-radius: 6px; cursor: pointer;">Guardar cambios</button>
+  </form>
+  <p style="text-align: center; margin-top: 20px;">
+    <a href="{{ url_for('mostrar_grupos') }}" style="color: #0077b6; text-decoration: none;">⬅ Volver al listado</a>
+  </p>
+</body>
+</html>

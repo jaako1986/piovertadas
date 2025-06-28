@@ -1,8 +1,23 @@
 import os
+
 from flask import Flask, render_template
+from models import db, GrupoScout
 
 app = Flask(__name__)
 
+from flask import session
+
+app.secret_key = 'PioVers2025'  # Cambiá por algo tuyo
+
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///grupos.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+db.init_app(app)
+
+with app.app_context():
+    db.create_all()
+
+@app.route('/')
 @app.route('/')
 def inicio():
     ruta = os.path.join(app.static_folder, "entradas")
@@ -18,7 +33,10 @@ def inicio():
                 "fecha": archivo[0:10],
                 "contenido": contenido
             })
-    return render_template("index.html", entradas=entradas)
+
+    grupos = GrupoScout.query.all()
+    return render_template("index.html", entradas=entradas, grupos=grupos)
+
 
 @app.route("/galeria")
 def galeria():
@@ -32,8 +50,71 @@ def material():
     formatos_validos = (".pdf", ".doc", ".docx", ".ppt", ".pptx", ".xls", ".xlsx")
     materiales = [f for f in archivos if f.endswith(formatos_validos)]
     return render_template("material.html", pdfs=materiales)
+@app.route('/grupos')
+def mostrar_grupos():
+    grupos = GrupoScout.query.all()
+    return render_template('grupos.html', grupos=grupos)
 
+from flask import request, redirect, url_for
+
+@app.route('/agregar-grupo', methods=['GET', 'POST'])
+def agregar_grupo():
+    if request.method == 'POST':
+        nuevo_grupo = GrupoScout(
+            nombre=request.form['nombre'],
+            ciudad=request.form['ciudad'],
+            provincia=request.form['provincia'],
+            contacto=request.form['contacto']
+        )
+        db.session.add(nuevo_grupo)
+        db.session.commit()
+        return redirect(url_for('inicio'))  # 👈 Vuelve al home
+    return render_template('agregar_grupo.html')
+@app.route('/editar-grupo/<int:id>', methods=['GET', 'POST'])
+def editar_grupo(id):
+    if not session.get('admin'):
+        return "Acceso denegado", 403
+    grupo = GrupoScout.query.get_or_404(id)
+    if request.method == 'POST':
+        grupo.nombre = request.form['nombre']
+        grupo.ciudad = request.form['ciudad']
+        grupo.provincia = request.form['provincia']
+        grupo.contacto = request.form['contacto']
+        db.session.commit()
+        return redirect(url_for('mostrar_grupos'))
+    return render_template('editar_grupo.html', grupo=grupo)
+
+@app.route('/borrar-grupo/<int:id>', methods=['POST'])
+def borrar_grupo(id):
+    if not session.get('admin'):
+        return "Acceso denegado", 403
+    grupo = GrupoScout.query.get_or_404(id)
+    db.session.delete(grupo)
+    db.session.commit()
+    return redirect(url_for('mostrar_grupos'))
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        if request.form['password'] == 'PioVers2025':  # Cambiá la clave
+            session['admin'] = True
+            return redirect(url_for('mostrar_grupos'))
+        else:
+            return "Clave incorrecta", 403
+    return '''
+        <form method="POST" style="text-align:center; margin-top:50px;">
+            <input type="password" name="password" placeholder="Clave" style="padding:8px;">
+            <button type="submit" style="padding:8px 12px;">Ingresar</button>
+        </form>
+    '''
+
+@app.route('/logout')
+def logout():
+    session.pop('admin', None)
+    return redirect(url_for('mostrar_grupos'))
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(debug=True, host="0.0.0.0", port=port)
+

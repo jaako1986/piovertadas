@@ -420,3 +420,10 @@ box-shadow: 0 0 10px rgba(0,0,0,0.1);
   overflow: hidden;
   box-shadow: 0 0 10px rgba(0,0,0,0.2);
 }
+.logo {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+.logo:hover {
+  transform: scale(1.05);
+}
