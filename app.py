@@ -16,6 +16,45 @@ db.init_app(app)
 
 with app.app_context():
     db.create_all()
+# --- Toggle Home V2 ---
+from datetime import datetime
+from flask import render_template, request
+
+USE_HOME_V2 = True  # ponlo en False si querés forzar el home viejo
+
+@app.context_processor
+def inject_now():
+    return {"now": datetime.utcnow}
+
+@app.route("/")
+def home():
+    # Datos de ejemplo (borrá si ya traés de DB):
+    eventos = [
+        {"titulo":"Guardianes del Fuego", "fecha":"26/07/2025", "descripcion":"Campamento de mitos y leyendas.", "link":"#"},
+        {"titulo":"Patio Criollo", "fecha":"10/10/2025", "descripcion":"Jornada solidaria y feria.", "link":"#"},
+    ]
+    galeria = [
+        {"src":"/static/img/gal/1.jpg","alt":"Fogón","caption":"Fogón Rover"},
+        {"src":"/static/img/gal/2.jpg","alt":"Campamento"},
+        {"src":"/static/img/gal/3.jpg","alt":"Taller nudos","caption":"Amarre cuadrado"},
+    ]
+    materiales = [
+        {"nombre":"Técnicas Scout","items":[
+            {"titulo":"Fogones seguros (PDF)","tipo":"PDF","url":"#"},
+            {"titulo":"Guía de nudos básicos","tipo":"Artículo","url":"#"}]},
+        {"nombre":"Historia Aeronaval","items":[
+            {"titulo":"Símbolos y tradición","tipo":"PDF","url":"#"}]},
+    ]
+    grupos = [
+        {"nombre":"Islas Malvinas Base VIII","ciudad":"Comodoro Rivadavia","web":"#"},
+        {"nombre":"Grupo X","ciudad":"Rada Tilly","web":None},
+    ]
+
+    use_v2 = request.args.get("v") == "2" or USE_HOME_V2
+    tpl = "home_v2.html" if use_v2 else "home.html"
+  return render_template("home_v2.html", eventos=eventos, galeria=galeria, materiales=materiales, grupos=grupos)
+s)
+# --- Fin Toggle ---
 
 @app.route('/')
 @app.route('/')

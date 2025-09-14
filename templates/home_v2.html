@@ -1,0 +1,103 @@
+<div style="position:fixed;right:12px;bottom:12px;background:#2bd1ff;color:#001017;padding:6px 10px;border-radius:10px;font-weight:700;z-index:9999">V2 ACTIVA</div>
+
+{% extends "base.html" %}
+{% block title %}PIOVERTADAS — Inicio v2{% endblock %}
+
+{% block content %}
+<!-- Hero con marca de agua -->
+<section class="hero">
+  <div class="hero__bg">
+    <!-- La marca de agua: usa tu logo (PNG/SVG) en /static/img/logo_agua.png -->
+  </div>
+  <div class="hero__content">
+    <h1>PIOVERTADAS</h1>
+    <p>Recursos, eventos y red de grupos Aeronavales.</p>
+    <a class="btn" href="{{ url_for('eventos') if 'eventos' in globals() else '#' }}">Ver eventos</a>
+  </div>
+</section>
+
+<!-- Eventos en tarjetas -->
+<section class="wrap">
+  <h2 class="sec-title">Próximos eventos</h2>
+  <div class="grid cards">
+    {% for ev in eventos or [] %}
+    <article class="card">
+      <header>
+        <h3>{{ ev.titulo }}</h3>
+        <span class="chip">{{ ev.fecha }}</span>
+      </header>
+      <p>{{ ev.descripcion }}</p>
+      {% if ev.link %}<a class="link" href="{{ ev.link }}">Más info</a>{% endif %}
+    </article>
+    {% else %}
+    <p class="muted">Sin eventos cargados por ahora.</p>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- Galería responsive con lazy load -->
+<section class="wrap">
+  <h2 class="sec-title">Galería</h2>
+  <div class="masonry">
+    {% for foto in galeria or [] %}
+    <figure class="masonry__item">
+      <img loading="lazy" src="{{ foto.src }}" alt="{{ foto.alt }}">
+      {% if foto.caption %}<figcaption>{{ foto.caption }}</figcaption>{% endif %}
+    </figure>
+    {% else %}
+    <p class="muted">Todavía no subiste fotos a la v2.</p>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- Materiales bibliográficos por categoría -->
+<section class="wrap">
+  <h2 class="sec-title">Materiales</h2>
+  <div class="grid cards">
+    {% for cat in materiales or [] %}
+    <article class="card">
+      <header><h3>{{ cat.nombre }}</h3></header>
+      <ul class="list">
+        {% for item in cat.items %}
+        <li>
+          {% if item.url %}<a href="{{ item.url }}" class="link">{{ item.titulo }}</a>
+          {% else %}{{ item.titulo }}{% endif %}
+          <span class="muted"> · {{ item.tipo }}</span>
+        </li>
+        {% endfor %}
+      </ul>
+    </article>
+    {% else %}
+    <p class="muted">Sumá PDFs, guías y fichas por categoría.</p>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- Grupos registrados -->
+<section class="wrap">
+  <h2 class="sec-title">Grupos registrados</h2>
+  <div class="table">
+    <div class="table__head">
+      <span>Grupo</span><span>Ciudad</span><span>Contacto</span>
+    </div>
+    {% for g in grupos or [] %}
+    <div class="table__row">
+      <span>{{ g.nombre }}</span>
+      <span>{{ g.ciudad }}</span>
+      <span>
+        {% if g.web %}<a class="link" href="{{ g.web }}">Sitio</a>{% else %}—{% endif %}
+      </span>
+    </div>
+    {% else %}
+    <p class="muted">Cuando cargues la base, aparece acá en tabla simple.</p>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="wrap">
+    <p>© {{  now().year if now else  "2025"  }} PIOVERTADAS · Hecho con Flask · ¡SERVIR!</p>
+  </div>
+</footer>
+{% endblock %}
