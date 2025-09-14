@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}PIOVERTADAS{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/home_v2.css', v=2) }}">
+  <style>body{background:#0b0e12;color:#e9eef5;font-family:system-ui,Segoe UI,Roboto,Inter,Arial,sans-serif;margin:0}</style>
+</head>
+<body>
+  <main>{% block content %}{% endblock %}</main>
+</body>
+</html>
