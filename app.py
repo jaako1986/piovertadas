@@ -1,67 +1,38 @@
+
 import os
+from flask import Flask, render_template, request, redirect, url_for
+from flask_sqlalchemy import SQLAlchemy
 
-from flask import Flask, render_template
-from models import db, GrupoScout
-
+# Crear la app
 app = Flask(__name__)
 
-from flask import session
-
-app.secret_key = 'PioVers2025'  # Cambiá por algo tuyo
-
+# Configuración de base de datos SQLite
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///grupos.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db = SQLAlchemy(app)
 
-db.init_app(app)
+# Modelo de grupos
+class GrupoScout(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    nombre = db.Column(db.String(100), nullable=False)
+    ciudad = db.Column(db.String(100), nullable=False)
+    provincia = db.Column(db.String(100), nullable=False)
+    contacto = db.Column(db.String(100), nullable=True)
 
+# Crear las tablas si no existen
 with app.app_context():
     db.create_all()
-# --- Toggle Home V2 ---
-from datetime import datetime
-from flask import render_template, request
 
-USE_HOME_V2 = True  # ponlo en False si querés forzar el home viejo
+# ---------- RUTAS ----------
 
-@app.context_processor
-def inject_now():
-    return {"now": datetime.utcnow}
-
+# HOME → usa home_v2.html
 @app.route("/")
 def home():
-    # Datos de ejemplo (borrá si ya traés de DB):
-    eventos = [
-        {"titulo":"Guardianes del Fuego", "fecha":"26/07/2025", "descripcion":"Campamento de mitos y leyendas.", "link":"#"},
-        {"titulo":"Patio Criollo", "fecha":"10/10/2025", "descripcion":"Jornada solidaria y feria.", "link":"#"},
-    ]
-    galeria = [
-        {"src":"/static/img/gal/1.jpg","alt":"Fogón","caption":"Fogón Rover"},
-        {"src":"/static/img/gal/2.jpg","alt":"Campamento"},
-        {"src":"/static/img/gal/3.jpg","alt":"Taller nudos","caption":"Amarre cuadrado"},
-    ]
-    materiales = [
-        {"nombre":"Técnicas Scout","items":[
-            {"titulo":"Fogones seguros (PDF)","tipo":"PDF","url":"#"},
-            {"titulo":"Guía de nudos básicos","tipo":"Artículo","url":"#"}]},
-        {"nombre":"Historia Aeronaval","items":[
-            {"titulo":"Símbolos y tradición","tipo":"PDF","url":"#"}]},
-    ]
-    grupos = [
-        {"nombre":"Islas Malvinas Base VIII","ciudad":"Comodoro Rivadavia","web":"#"},
-        {"nombre":"Grupo X","ciudad":"Rada Tilly","web":None},
-    ]
-
-    use_v2 = request.args.get("v") == "2" or USE_HOME_V2
-    tpl = "home_v2.html" if use_v2 else "home.html"
-  return render_template("home_v2.html", eventos=eventos, galeria=galeria, materiales=materiales, grupos=grupos)
-s)
-# --- Fin Toggle ---
-
-@app.route('/')
-@app.route('/')
-def inicio():
+    # cargar entradas desde static/entradas
     ruta = os.path.join(app.static_folder, "entradas")
     if not os.path.exists(ruta):
         os.makedirs(ruta)
+
     entradas = []
     for archivo in sorted(os.listdir(ruta), reverse=True):
         if archivo.endswith(".html"):
@@ -73,87 +44,59 @@ def inicio():
                 "contenido": contenido
             })
 
+    # cargar grupos desde la base de datos
     grupos = GrupoScout.query.all()
-    return render_template("index.html", entradas=entradas, grupos=grupos)
 
+    return render_template("home_v2.html", entradas=entradas, grupos=grupos)
 
+# GALERÍA
 @app.route("/galeria")
 def galeria():
-    ruta = os.path.join(app.static_folder, "fotos")
-    imagenes = [f"fotos/{img}" for img in os.listdir(ruta) if img.endswith((".jpg", ".png", ".jpeg", ".webp"))]
-    return render_template("galeria.html", imagenes=imagenes)
+    return render_template("galeria.html")
 
-@app.route("/material")
-def material():
-    archivos = os.listdir(os.path.join(app.static_folder, "material"))
-    formatos_validos = (".pdf", ".doc", ".docx", ".ppt", ".pptx", ".xls", ".xlsx")
-    materiales = [f for f in archivos if f.endswith(formatos_validos)]
-    return render_template("material.html", pdfs=materiales)
-@app.route('/grupos')
-def mostrar_grupos():
+# BLOG
+@app.route("/blog")
+def blog():
+    return render_template("blog.html")
+
+# GRUPOS (vista lista)
+@app.route("/grupos")
+def ver_grupos():
     grupos = GrupoScout.query.all()
-    return render_template('grupos.html', grupos=grupos)
+    return render_template("grupos.html", grupos=grupos)
 
-from flask import request, redirect, url_for
-
-@app.route('/agregar-grupo', methods=['GET', 'POST'])
+# AGREGAR GRUPO
+@app.route("/agregar_grupo", methods=["GET", "POST"])
 def agregar_grupo():
-    if request.method == 'POST':
-        nuevo_grupo = GrupoScout(
-            nombre=request.form['nombre'],
-            ciudad=request.form['ciudad'],
-            provincia=request.form['provincia'],
-            contacto=request.form['contacto']
-        )
-        db.session.add(nuevo_grupo)
+    if request.method == "POST":
+        nombre = request.form["nombre"]
+        ciudad = request.form["ciudad"]
+        provincia = request.form["provincia"]
+        contacto = request.form["contacto"]
+
+        nuevo = GrupoScout(nombre=nombre, ciudad=ciudad, provincia=provincia, contacto=contacto)
+        db.session.add(nuevo)
         db.session.commit()
-        return redirect(url_for('inicio'))  # 👈 Vuelve al home
-    return render_template('agregar_grupo.html')
-@app.route('/editar-grupo/<int:id>', methods=['GET', 'POST'])
+        return redirect(url_for("ver_grupos"))
+
+    return render_template("agregar_grupo.html")
+
+# EDITAR GRUPO
+@app.route("/editar_grupo/<int:id>", methods=["GET", "POST"])
 def editar_grupo(id):
-    if not session.get('admin'):
-        return "Acceso denegado", 403
     grupo = GrupoScout.query.get_or_404(id)
-    if request.method == 'POST':
-        grupo.nombre = request.form['nombre']
-        grupo.ciudad = request.form['ciudad']
-        grupo.provincia = request.form['provincia']
-        grupo.contacto = request.form['contacto']
+
+    if request.method == "POST":
+        grupo.nombre = request.form["nombre"]
+        grupo.ciudad = request.form["ciudad"]
+        grupo.provincia = request.form["provincia"]
+        grupo.contacto = request.form["contacto"]
         db.session.commit()
-        return redirect(url_for('mostrar_grupos'))
-    return render_template('editar_grupo.html', grupo=grupo)
+        return redirect(url_for("ver_grupos"))
 
-@app.route('/borrar-grupo/<int:id>', methods=['POST'])
-def borrar_grupo(id):
-    if not session.get('admin'):
-        return "Acceso denegado", 403
-    grupo = GrupoScout.query.get_or_404(id)
-    db.session.delete(grupo)
-    db.session.commit()
-    return redirect(url_for('mostrar_grupos'))
+    return render_template("editar_grupo.html", grupo=grupo)
 
-
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    if request.method == 'POST':
-        if request.form['password'] == 'PioVers2025':  # Cambiá la clave
-            session['admin'] = True
-            return redirect(url_for('mostrar_grupos'))
-        else:
-            return "Clave incorrecta", 403
-    return '''
-        <form method="POST" style="text-align:center; margin-top:50px;">
-            <input type="password" name="password" placeholder="Clave" style="padding:8px;">
-            <button type="submit" style="padding:8px 12px;">Ingresar</button>
-        </form>
-    '''
-
-@app.route('/logout')
-def logout():
-    session.pop('admin', None)
-    return redirect(url_for('mostrar_grupos'))
+# ----------------------------
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))
-    app.run(debug=True, host="0.0.0.0", port=port)
-
+    app.run(debug=True)

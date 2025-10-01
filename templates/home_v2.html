@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+{% block title %}PIOVERTADAS - Nueva Versión{% endblock %}
+
+{% block content %}
+<div class="container">
+
+  <!-- Encabezado -->
+  <header class="encabezado">
+    <img src="{{ url_for('static', filename='backgrounds/escudo.png') }}" alt="escudogrupo" class="logo">
+    <h1><a href="/">PIOVERTADAS</a></h1>
+    <a href="{{ url_for('agregar_grupo') }}">
+      <img src="{{ url_for('static', filename='backgrounds/logopromesa.png') }}" alt="Registrar grupo" class="logo">
+    </a>
+  </header>
+
+  <!-- Layout de 2 columnas -->
+  
+   <div class="layout">
+
+  <!-- IZQUIERDA: Entradas + Grupos -->
+  <div class="col-izq">
+
+    <!-- Últimas entradas -->
+    <section class="card">
+      <h2>📝 Últimas Entradas</h2>
+      {% if entradas %}
+        {% for entrada in entradas %}
+          <article class="entrada-card">
+            <h3>{{ entrada.titulo }}</h3>
+            <small>{{ entrada.fecha }}</small>
+            <div class="contenido">{{ entrada.contenido | safe }}</div>
+          </article>
+        {% endfor %}
+      {% else %}
+        <p class="muted">Todavía no hay entradas en el blog.</p>
+      {% endif %}
+    </section>
+
+    <!-- Grupos -->
+    <section class="card">
+      <h2>🚀 Grupos Registrados</h2>
+      {% if grupos %}
+        <div class="grupos-grid">
+          {% for grupo in grupos %}
+            <div class="grupo-card">
+              <h3>{{ grupo.nombre }}</h3>
+              <p>📍 {{ grupo.ciudad }}, {{ grupo.provincia }}</p>
+              <p>📞 {{ grupo.contacto }}</p>
+            </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <p class="muted">No hay grupos cargados aún.</p>
+      {% endif %}
+    </section>
+
+  </div>
+
+  <!-- DERECHA: Enlaces + CTA Registro + Ubicación -->
+  <aside class="col-der">
+
+    <section class="card">
+      <h2>🔗 Enlaces Útiles</h2>
+      <ul class="link-list">
+        <li><a href="/">🏠 Inicio</a></li>
+        <li><a href="/galeria">📷 Galería</a></li>
+        <li><a href="/material">📚 Material Bibliográfico</a></li>
+      </ul>
+    </section>
+
+    <!-- CTA destacado para registrar grupo -->
+    <section class="card cta-card">
+      <h2>🧭 Sumá tu Grupo</h2>
+      <p>Registrá tu grupo para aparecer en el mapa y conectar con más gente.</p>
+      <a href="{{ url_for('agregar_grupo') }}" class="btn btn-cta">➕ Registrar grupo</a>
+      <small class="cta-hint">Tarda menos de 1 minuto.</small>
+    </section>
+
+    <!-- Ubicación / Mapa -->
+    <section class="card">
+      <h2>🗺️ Ubicación</h2>
+      <div id="mapa"></div>
+    </section>
+
+    <!-- Redes sociales (botones grandes) -->
+    <section class="card">
+      <h2>📲 Seguinos</h2>
+      <div class="social-grid">
+        <a class="social instagram" href="https://www.instagram.com/piovers_cr" target="_blank">Instagram Piovers</a>
+        <a class="social facebook"  href="https://www.facebook.com/profile.php?id=61556018938393" target="_blank">Facebook Grupo</a>
+        <a class="social instagram" href="https://www.instagram.com/scoutsaeronavalesislasmalvinas" target="_blank">Instagram Grupo</a>
+      </div>
+    </section>
+
+  </aside>
+
+</div>
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+  <!-- JS del mapa -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    var map = L.map('mapa').setView([-45.8662, -67.4827], 14);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap | PIOVERTADAS',
+      maxZoom: 18
+    }).addTo(map);
+    L.marker([-45.83165838192026, -67.48202591524412]).addTo(map)
+      .bindPopup('<b>Grupo Scouts Aeronavales Islas Malvinas</b><br>Base VIII<br>Comodoro Rivadavia')
+      .openPopup();
+  </script>
+{% endblock %}

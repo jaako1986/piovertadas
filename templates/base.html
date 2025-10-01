@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="es">
+<head>
+ <!-- CSS principal -->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/home_v2.css') }}">
+
+<!-- (Opcional) Tu style.css SOLO si existe en static/css/ -->
+{# <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"> #}
+
+<!-- (Opcional) Si vas a usar la fuente, cargala bien -->
+<link rel="preload"
+      href="{{ url_for('static', filename='fonts/WoodWorks-Plain.otf') }}"
+      as="font" type="font/otf" crossorigin>
+<style>
+  @font-face{
+    font-family: 'WoodWorks';
+    src: url('{{ url_for('static', filename='fonts/WoodWorks-Plain.otf') }}') format('opentype');
+    font-weight: normal; font-style: normal; font-display: swap;
+  }
+  /* Ejemplo: usar la fuente si querés */
+  /* body { font-family: WoodWorks, Rubik, system-ui, sans-serif; } */
+</style>
+</head>
+<body>
+
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  {% block scripts %}{% endblock %}
+</body>
+</html>
