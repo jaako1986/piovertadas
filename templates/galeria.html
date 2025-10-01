@@ -1,56 +1,21 @@
-
-<!DOCTYPE html>
-<html lang="es">
-<link rel="icon" href="{{ url_for('static', filename='brujula.png') }}" type="image/png">
-
-<head>
-  <meta charset="UTF-8">
-  <title>Galería Scout</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
-<header class="encabezado">
-  <div class="logo-container">
-     <img src="{{ url_for('static', filename='backgrounds/escudo.png') }}" alt="escudogrupo" class="logo">
-  </div>
-
-<div class="titulo-container">
-  <h1 class="titulo">
-    <a href="/">PIOVERTADAS</a>
-  </h1>
-</div>
-
-  <div class="logo-container">
-   <img src="{{ url_for('static', filename='backgrounds/logopromesa.png') }}" alt="logopromesado" class="logo">
-  </div>
-</header>
-
-<h2>📷 Galería Scout</h2>
-
-<div class="layout">
-  <main class="galeria-grid">
-      {% for imagen in imagenes %}
-  <div class="foto">
-    <img src="{{ url_for('static', filename=imagen) }}" alt="imagen scout" onclick="mostrarImagen(this.src)">
-  </div>
-{% endfor %}
-  </main>
-
-
-<!-- Visor ampliado -->
-<div id="visor" onclick="cerrarImagen()">
-  <img id="imagen-grande" src="">
-</div>
-
-<script>
-function mostrarImagen(src) {
-  document.getElementById("imagen-grande").src = src;
-  document.getElementById("visor").style.display = "flex";
-}
-function cerrarImagen() {
-  document.getElementById("visor").style.display = "none";
-}
-</script>
-
-</body>
-</html>
+{% extends "base.html" %}
+{% block title %}Galería — PIOVERTADAS{% endblock %}
+{% block content %}
+<section class="section container">
+  <h1>Galería</h1>
+  {% if fotos %}
+    <div class="gallery">
+      {% for ruta in fotos %}
+        <figure class="g-item">
+          <img loading="lazy"
+               src="{{ url_for('static', filename=ruta) }}"
+               alt="Foto {{ loop.index }}"
+               width="1200" height="800" />
+        </figure>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p>No hay fotos todavía. Subí archivos a <code>static/fotos</code>.</p>
+  {% endif %}
+</section>
+{% endblock %}

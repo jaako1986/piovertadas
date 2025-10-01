@@ -1,17 +1,19 @@
-
 import os
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 
-# Crear la app
 app = Flask(__name__)
 
-# Configuración de base de datos SQLite
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///grupos.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+# --- DB config (Render usa DATABASE_URL si existe) ---
+db_url = os.getenv("DATABASE_URL")
+if db_url:
+    app.config["SQLALCHEMY_DATABASE_URI"] = db_url  # ej: postgresql://...
+else:
+    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///grupos.db"
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
 
-# Modelo de grupos
+# --- Modelo ---
 class GrupoScout(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nombre = db.Column(db.String(100), nullable=False)
@@ -19,84 +21,68 @@ class GrupoScout(db.Model):
     provincia = db.Column(db.String(100), nullable=False)
     contacto = db.Column(db.String(100), nullable=True)
 
-# Crear las tablas si no existen
 with app.app_context():
     db.create_all()
 
-# ---------- RUTAS ----------
-
-# HOME → usa home_v2.html
+# --- RUTAS ---
 @app.route("/")
 def home():
-    # cargar entradas desde static/entradas
-    ruta = os.path.join(app.static_folder, "entradas")
-    if not os.path.exists(ruta):
-        os.makedirs(ruta)
+    # Si querés cargar entradas/materiales desde carpetas estáticas, podés hacerlo acá.
+    return render_template("home_v2.html")
 
-    entradas = []
-    for archivo in sorted(os.listdir(ruta), reverse=True):
-        if archivo.endswith(".html"):
-            with open(os.path.join(ruta, archivo), "r", encoding="utf-8") as f:
-                contenido = f.read()
-            entradas.append({
-                "titulo": archivo[11:-5].replace("-", " ").capitalize(),
-                "fecha": archivo[0:10],
-                "contenido": contenido
-            })
-
-    # cargar grupos desde la base de datos
-    grupos = GrupoScout.query.all()
-
-    return render_template("home_v2.html", entradas=entradas, grupos=grupos)
-
-# GALERÍA
 @app.route("/galeria")
 def galeria():
-    return render_template("galeria.html")
+    fotos_dir = os.path.join(app.static_folder, "fotos")
+    fotos = []
+    if os.path.isdir(fotos_dir):
+        for f in sorted(os.listdir(fotos_dir)):
+            if f.lower().endswith((".jpg", ".jpeg", ".png", ".webp")):
+                fotos.append(f"fotos/{f}")  # relativo a /static/
+    return render_template("galeria.html", fotos=fotos)
 
-# BLOG
-@app.route("/blog")
-def blog():
-    return render_template("blog.html")
+@app.route("/materiales")
+def materiales():
+    mats_dir = os.path.join(app.static_folder, "materiales")
+    mats = []
+    if os.path.isdir(mats_dir):
+        for f in sorted(os.listdir(mats_dir)):
+            if f.lower().endswith(".pdf"):
+                mats.append({
+                    "nombre": os.path.splitext(f)[0].replace("-", " ").title(),
+                    "ruta": f"materiales/{f}",
+                })
+    return render_template("materiales.html", materiales=mats)
 
-# GRUPOS (vista lista)
 @app.route("/grupos")
 def ver_grupos():
-    grupos = GrupoScout.query.all()
+    grupos = GrupoScout.query.order_by(GrupoScout.nombre.asc()).all()
     return render_template("grupos.html", grupos=grupos)
 
-# AGREGAR GRUPO
 @app.route("/agregar_grupo", methods=["GET", "POST"])
 def agregar_grupo():
     if request.method == "POST":
-        nombre = request.form["nombre"]
-        ciudad = request.form["ciudad"]
-        provincia = request.form["provincia"]
-        contacto = request.form["contacto"]
-
-        nuevo = GrupoScout(nombre=nombre, ciudad=ciudad, provincia=provincia, contacto=contacto)
-        db.session.add(nuevo)
-        db.session.commit()
-        return redirect(url_for("ver_grupos"))
-
+        nombre = request.form.get("nombre", "").strip()
+        ciudad = request.form.get("ciudad", "").strip()
+        provincia = request.form.get("provincia", "").strip()
+        contacto = request.form.get("contacto", "").strip()
+        if nombre and ciudad and provincia:
+            nuevo = GrupoScout(nombre=nombre, ciudad=ciudad, provincia=provincia, contacto=contacto or None)
+            db.session.add(nuevo)
+            db.session.commit()
+            return redirect(url_for("ver_grupos"))
     return render_template("agregar_grupo.html")
 
-# EDITAR GRUPO
 @app.route("/editar_grupo/<int:id>", methods=["GET", "POST"])
 def editar_grupo(id):
     grupo = GrupoScout.query.get_or_404(id)
-
     if request.method == "POST":
-        grupo.nombre = request.form["nombre"]
-        grupo.ciudad = request.form["ciudad"]
-        grupo.provincia = request.form["provincia"]
-        grupo.contacto = request.form["contacto"]
+        grupo.nombre = request.form.get("nombre", grupo.nombre).strip()
+        grupo.ciudad = request.form.get("ciudad", grupo.ciudad).strip()
+        grupo.provincia = request.form.get("provincia", grupo.provincia).strip()
+        grupo.contacto = request.form.get("contacto", grupo.contacto)
         db.session.commit()
         return redirect(url_for("ver_grupos"))
-
     return render_template("editar_grupo.html", grupo=grupo)
-
-# ----------------------------
 
 if __name__ == "__main__":
     app.run(debug=True)

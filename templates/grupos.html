@@ -1,54 +1,37 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <title>Bitácora Scout</title>
-  <link rel="icon" type="image/png" href="{{ url_for('static', filename='brujula.png') }}">
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v=final1">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-</head>
-<body>
-<div class="container">
-  <header class="encabezado">
-    <div class="logo-container">
-      <img src="{{ url_for('static', filename='backgrounds/escudo.png') }}" alt="escudogrupo" class="logo">
-    </div>
-    <div class="titulo-container">
-      <h1 class="titulo"><a href="/">PIOVERTADAS</a></h1>
-    </div>
-    <div class="logo-container">
-    <a href="{{ url_for('agregar_grupo') }}">
-  <img src="{{ url_for('static', filename='backgrounds/logopromesa.png') }}" alt="Registrar grupo" class="logo">
-</a>
-
-    </div>
-  </header>
-  <meta charset="UTF-8">
-  <title>Grupos registrados</title>
-  {% if session.get('admin') %}
-  <p style="text-align:right;"><a href="{{ url_for('logout') }}">🚪 Cerrar sesión</a></p>
-{% else %}
-  <p style="text-align:right;"><a href="{{ url_for('login') }}">🔑 Iniciar sesión</a></p>
-{% endif %}
-
-
-<body>
+{% extends "base.html" %}
+{% block title %}Grupos — PIOVERTADAS{% endblock %}
+{% block content %}
+<section class="section container">
   <h1>Grupos registrados</h1>
-  {% if grupos %}
-    <ul>
-      {% for grupo in grupos %}
-      <li>
-  <strong>{{ grupo.nombre }}</strong> - {{ grupo.ciudad }}, {{ grupo.provincia }} - {{ grupo.contacto }}<br>
-  <a href="{{ url_for('editar_grupo', id=grupo.id) }}">✏️ Editar</a>
-  <form action="{{ url_for('borrar_grupo', id=grupo.id) }}" method="POST" style="display:inline;">
-    <button type="submit" style="color: red; border: none; background: none; cursor: pointer;">🗑️ Borrar</button>
-  </form>
-</li>
+  <p><a class="btn" href="{{ url_for('agregar_grupo') }}">+ Agregar grupo</a></p>
 
-      {% endfor %}
-    </ul>
+  {% if grupos %}
+    <div style="overflow:auto">
+      <table style="width:100%;border-collapse:collapse">
+        <thead>
+          <tr>
+            <th style="text-align:left;padding:.5rem;border-bottom:1px solid rgba(255,255,255,.15)">Nombre</th>
+            <th style="text-align:left;padding:.5rem;border-bottom:1px solid rgba(255,255,255,.15)">Ciudad</th>
+            <th style="text-align:left;padding:.5rem;border-bottom:1px solid rgba(255,255,255,.15)">Provincia</th>
+            <th style="text-align:left;padding:.5rem;border-bottom:1px solid rgba(255,255,255,.15)">Contacto</th>
+            <th style="text-align:left;padding:.5rem;border-bottom:1px solid rgba(255,255,255,.15)"></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for g in grupos %}
+            <tr>
+              <td style="padding:.5rem">{{ g.nombre }}</td>
+              <td style="padding:.5rem">{{ g.ciudad }}</td>
+              <td style="padding:.5rem">{{ g.provincia }}</td>
+              <td style="padding:.5rem">{{ g.contacto or '-' }}</td>
+              <td style="padding:.5rem"><a href="{{ url_for('editar_grupo', id=g.id) }}">Editar</a></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
   {% else %}
-    <p>No hay grupos cargados aún.</p>
+    <p>Sin grupos por ahora.</p>
   {% endif %}
-</body>
-</html>
+</section>
+{% endblock %}

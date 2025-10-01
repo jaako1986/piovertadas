@@ -1,32 +1,40 @@
 <!doctype html>
 <html lang="es">
 <head>
- <!-- CSS principal -->
-<link rel="stylesheet" href="{{ url_for('static', filename='css/home_v2.css') }}">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{% block title %}PIOVERTADAS{% endblock %}</title>
 
-<!-- (Opcional) Tu style.css SOLO si existe en static/css/ -->
-{# <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"> #}
+  <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600;800&display=swap" rel="stylesheet">
 
-<!-- (Opcional) Si vas a usar la fuente, cargala bien -->
-<link rel="preload"
-      href="{{ url_for('static', filename='fonts/WoodWorks-Plain.otf') }}"
-      as="font" type="font/otf" crossorigin>
-<style>
-  @font-face{
-    font-family: 'WoodWorks';
-    src: url('{{ url_for('static', filename='fonts/WoodWorks-Plain.otf') }}') format('opentype');
-    font-weight: normal; font-style: normal; font-display: swap;
-  }
-  /* Ejemplo: usar la fuente si querés */
-  /* body { font-family: WoodWorks, Rubik, system-ui, sans-serif; } */
-</style>
+  <!-- CSS principal (único) -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/home_v2.css') }}">
+  {% block head %}{% endblock %}
 </head>
 <body>
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="{{ url_for('home') }}">PIOVERTADAS</a>
+      <nav class="nav">
+        <a href="{{ url_for('home') }}">Inicio</a>
+        <a href="{{ url_for('galeria') }}">Galería</a>
+        <a href="{{ url_for('materiales') }}">Materiales</a>
+        <a href="{{ url_for('ver_grupos') }}">Grupos</a>
+      </nav>
+    </div>
+  </header>
 
   <main>
     {% block content %}{% endblock %}
   </main>
 
+  <footer class="site-footer">
+    <div class="container">© 2025 PIOVERTADAS — Patagonia</div>
+  </footer>
+
+  <script defer src="{{ url_for('static', filename='js/lazyload.js') }}"></script>
   {% block scripts %}{% endblock %}
 </body>
 </html>
