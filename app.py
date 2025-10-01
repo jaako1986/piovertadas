@@ -50,10 +50,14 @@ def home():
         {"nombre":"Grupo X","ciudad":"Rada Tilly","web":None},
     ]
 
-    return render_template("home_v2.html", eventos=eventos, galeria=galeria, materiales=materiales, grupos=grupos)
+    use_v2 = request.args.get("v") == "2" or USE_HOME_V2
+    tpl = "home_v2.html" if use_v2 else "home.html"
+  return render_template("home_v2.html", eventos=eventos, galeria=galeria, materiales=materiales, grupos=grupos)
+s)
 # --- Fin Toggle ---
 
-@app.route('/blog')
+@app.route('/')
+@app.route('/')
 def inicio():
     ruta = os.path.join(app.static_folder, "entradas")
     if not os.path.exists(ruta):
