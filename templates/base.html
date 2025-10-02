@@ -1,57 +1,43 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <a class="brand" href="{{ url_for('home') }}">
-  <img class="brand-logo" src="{{ url_for('static', filename='backgrounds/escudo.png') }}" alt="Escudo" />
-  <span class="brand-text">PIOVERTADAS</span>
-</a>
-
-  <title>{% block title %}PIOVERTADAS{% endblock %}</title>
-
-  <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600;800&display=swap" rel="stylesheet">
-
-  <!-- CSS principal (único) -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PIOVERTADAS</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/home_v2.css') }}">
-  {% block head %}{% endblock %}
+  <link rel="preload" href="{{ url_for('static', filename='fonts/WoodWorks-Plain.otf') }}" as="font" type="font/otf" crossorigin="anonymous">
 </head>
 <body>
- <header class="site-header">
-  <div class="container">
-    <!-- Marca: UN SOLO LOGO + texto -->
-    <a class="brand" href="{{ url_for('home') }}" aria-label="Inicio">
-      <img class="brand-logo" src="{{ url_for('static', filename='backgrounds/escudo.png') }}" alt="">
-      <span class="brand-text">PIOVERTADAS</span>
-    </a>
+  <!-- ==== HEADER ==== -->
+  <header class="site-header">
+    <div class="nav-container">
+      <div class="brand">
+        <img src="{{ url_for('static', filename='backgrounds/escudo.png') }}" alt="Logo Grupo" class="brand-logo">
+        <span class="brand-text">PIOVERTADAS</span>
+      </div>
+      <nav class="nav-links">
+        <a href="{{ url_for('home') }}">Inicio</a>
+        <a href="{{ url_for('galeria') }}">Galería</a>
+        <a href="{{ url_for('materiales') }}">Material</a>
+        <a href="{{ url_for('mostrar_grupos') }}">Grupos</a>
+      </nav>
+    </div>
+  </header>
 
-    <!-- Nav a la derecha -->
-    <nav class="nav">
-      <a class="{{ 'active' if request.path == url_for('home') else '' }}" href="{{ url_for('home') }}">Inicio</a>
-      <a class="{{ 'active' if request.path.startswith('/galeria') else '' }}" href="{{ url_for('galeria') }}">Galería</a>
-      <a class="{{ 'active' if request.path.startswith('/materiales') else '' }}" href="{{ url_for('materiales') }}">Materiales</a>
-      <a class="{{ 'active' if request.path.startswith('/grupos') else '' }}" href="{{ url_for('ver_grupos') }}">Grupos</a>
-    </nav>
-  </div>
-</header>
-
-
+  <!-- ==== CONTENIDO PRINCIPAL ==== -->
   <main>
     {% block content %}{% endblock %}
   </main>
 
+  <!-- ==== FOOTER ==== -->
   <footer class="site-footer">
-  <div class="container footer-grid">
-    <div>© 2025 PIOVERTADAS — Patagonia</div>
-    <!-- ASA al pie (pertenencia, no compite con la marca) -->
-    <div class="footer-logos">
-      <img src="{{ url_for('static', filename='backgrounds/logopromesa.png') }}" alt="ASA">
+    <div class="footer-grid">
+      <p>© {{ now().year }} Grupo Scouts Aeronavales “Islas Malvinas” Base VIII</p>
+      <div class="footer-logos">
+        <img src="{{ url_for('static', filename='backgrounds/logoASA.png') }}" alt="Logo ASA">
+      </div>
     </div>
-  </div>
-</footer>
-  <script defer src="{{ url_for('static', filename='js/lazyload.js') }}"></script>
-  {% block scripts %}{% endblock %}
+  </footer>
 </body>
 </html>
+
