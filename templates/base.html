@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PIOVERTADAS</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{% block title %}PIOVERTADAS{% endblock %}</title>
+
   <link rel="stylesheet" href="{{ url_for('static', filename='css/home_v2.css') }}">
   <link rel="preload" href="{{ url_for('static', filename='fonts/WoodWorks-Plain.otf') }}" as="font" type="font/otf" crossorigin="anonymous">
 </head>
@@ -19,13 +20,12 @@
         <a href="{{ url_for('home') }}">Inicio</a>
         <a href="{{ url_for('galeria') }}">Galería</a>
         <a href="{{ url_for('materiales') }}">Material</a>
-+ <a href="{{ url_for('ver_grupos') }}">Grupos</a>
-
+        <a href="{{ url_for('ver_grupos') }}">Grupos</a>
       </nav>
     </div>
   </header>
 
-  <!-- ==== CONTENIDO PRINCIPAL ==== -->
+  <!-- ==== CONTENIDO ==== -->
   <main>
     {% block content %}{% endblock %}
   </main>
@@ -33,7 +33,7 @@
   <!-- ==== FOOTER ==== -->
   <footer class="site-footer">
     <div class="footer-grid">
-    + <p>© {{ now.year }} Grupo Scouts Aeronavales “Islas Malvinas” Base VIII</p>
+      <p>© {{ current_year }} Grupo Scouts Aeronavales “Islas Malvinas” Base VIII</p>
       <div class="footer-logos">
         <img src="{{ url_for('static', filename='backgrounds/logoASA.png') }}" alt="Logo ASA">
       </div>
@@ -41,4 +41,3 @@
   </footer>
 </body>
 </html>
-
