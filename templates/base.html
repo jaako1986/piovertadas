@@ -19,25 +19,21 @@
   {% block head %}{% endblock %}
 </head>
 <body>
-  <header class="site-header">
+ <header class="site-header">
   <div class="container">
-    <a class="brand" href="{{ url_for('home') }}">
-      <img class="brand-logo" src="{{ url_for('static', filename='backgrounds/escudo.png') }}" alt="Escudo">
+    <!-- Marca: UN SOLO LOGO + texto -->
+    <a class="brand" href="{{ url_for('home') }}" aria-label="Inicio">
+      <img class="brand-logo" src="{{ url_for('static', filename='backgrounds/escudo.png') }}" alt="">
       <span class="brand-text">PIOVERTADAS</span>
     </a>
 
+    <!-- Nav a la derecha -->
     <nav class="nav">
       <a class="{{ 'active' if request.path == url_for('home') else '' }}" href="{{ url_for('home') }}">Inicio</a>
       <a class="{{ 'active' if request.path.startswith('/galeria') else '' }}" href="{{ url_for('galeria') }}">Galería</a>
       <a class="{{ 'active' if request.path.startswith('/materiales') else '' }}" href="{{ url_for('materiales') }}">Materiales</a>
       <a class="{{ 'active' if request.path.startswith('/grupos') else '' }}" href="{{ url_for('ver_grupos') }}">Grupos</a>
     </nav>
-
-    <!-- Logos a la derecha -->
-    <div class="header-logos">
-      <img class="logo-grupo" src="{{ url_for('static', filename='backgrounds/escudo.png') }}" alt="Escudo PIOVERTADAS">
-      <img class="logo-asa"   src="{{ url_for('static', filename='backgrounds/logopromesa.png') }}" alt="ASA">
-    </div>
   </div>
 </header>
 
@@ -47,9 +43,14 @@
   </main>
 
   <footer class="site-footer">
-    <div class="container">© 2025 PIOVERTADAS — Patagonia</div>
-  </footer>
-
+  <div class="container footer-grid">
+    <div>© 2025 PIOVERTADAS — Patagonia</div>
+    <!-- ASA al pie (pertenencia, no compite con la marca) -->
+    <div class="footer-logos">
+      <img src="{{ url_for('static', filename='backgrounds/logopromesa.png') }}" alt="ASA">
+    </div>
+  </div>
+</footer>
   <script defer src="{{ url_for('static', filename='js/lazyload.js') }}"></script>
   {% block scripts %}{% endblock %}
 </body>

@@ -5,31 +5,27 @@
   <h1>Grupos registrados</h1>
   <p><a class="btn" href="{{ url_for('agregar_grupo') }}">+ Agregar grupo</a></p>
 
-  {% if grupos %}
-    <div style="overflow:auto">
-      <table style="width:100%;border-collapse:collapse">
-        <thead>
-          <tr>
-            <th style="text-align:left;padding:.5rem;border-bottom:1px solid rgba(255,255,255,.15)">Nombre</th>
-            <th style="text-align:left;padding:.5rem;border-bottom:1px solid rgba(255,255,255,.15)">Ciudad</th>
-            <th style="text-align:left;padding:.5rem;border-bottom:1px solid rgba(255,255,255,.15)">Provincia</th>
-            <th style="text-align:left;padding:.5rem;border-bottom:1px solid rgba(255,255,255,.15)">Contacto</th>
-            <th style="text-align:left;padding:.5rem;border-bottom:1px solid rgba(255,255,255,.15)"></th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for g in grupos %}
-            <tr>
-              <td style="padding:.5rem">{{ g.nombre }}</td>
-              <td style="padding:.5rem">{{ g.ciudad }}</td>
-              <td style="padding:.5rem">{{ g.provincia }}</td>
-              <td style="padding:.5rem">{{ g.contacto or '-' }}</td>
-              <td style="padding:.5rem"><a href="{{ url_for('editar_grupo', id=g.id) }}">Editar</a></td>
-            </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-    </div>
+ <div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th>Nombre</th><th>Ciudad</th><th>Provincia</th><th>Contacto</th><th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for g in grupos %}
+      <tr>
+        <td>{{ g.nombre }}</td>
+        <td>{{ g.ciudad }}</td>
+        <td>{{ g.provincia }}</td>
+        <td>{{ g.contacto or '-' }}</td>
+        <td><a href="{{ url_for('editar_grupo', id=g.id) }}">Editar</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
   {% else %}
     <p>Sin grupos por ahora.</p>
   {% endif %}
