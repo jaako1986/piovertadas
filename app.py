@@ -1,4 +1,5 @@
 import os
+from datetime import datetime
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 
@@ -27,8 +28,8 @@ with app.app_context():
 # --- RUTAS ---
 @app.route("/")
 def home():
-    # Si querés cargar entradas/materiales desde carpetas estáticas, podés hacerlo acá.
-    return render_template("home_v2.html")
+    # Si tu template usa {{ now }}, lo pasamos desde acá
+    return render_template("home_v2.html", now=datetime.now())
 
 @app.route("/galeria")
 def galeria():
@@ -86,8 +87,3 @@ def editar_grupo(id):
 
 if __name__ == "__main__":
     app.run(debug=True)
-from datetime import datetime
-
-@app.route("/")
-def home():
-    return render_template("home_v2.html", now=datetime.now())
