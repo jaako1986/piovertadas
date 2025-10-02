@@ -1,331 +1,190 @@
-/* ======= HOME V2 ======= */
-/* 1) Cargo la fuente local (la tapa del cuento) */
-@font-face {
-  font-family: 'WoodWorks Plain';
-  src: url('./fonts/WoodWorks-Plain.otf') format('opentype');
+/* ============================
+   PIOVERTADAS — Home v2 (FULL)
+   ============================ */
+
+/* 0) Fuente custom (si no la usás, podés borrar este bloque) */
+@font-face{
+  font-family: 'WoodWorks';
+  src: url('/static/fonts/WoodWorks-Plain.otf') format('opentype');
   font-weight: 400;
   font-style: normal;
-  font-display: swap; /* carga rápido y después cambia si hace falta */
+  font-display: swap;
 }
 
-/* Contenedor general */
-.container {
-  max-width: 1100px;
-  margin: auto;
-  padding: 20px;
-  font-family: Arial, sans-serif;
+/* 1) Paleta y base */
+:root{
+  /* Aeronaval / Scout */
+  --bg: #002233;       /* azul petróleo oscuro */
+  --bg-2: #0b1f2c;     /* variante para degradé */
+  --card: #0e2632;     /* paneles */
+  --text: #f2f6f5;     /* texto principal */
+  --muted: #bcd0cc;    /* texto secundario */
+  --accent: #f77f00;   /* naranja (cta) */
+  --accent-2: #2a9d8f; /* verde agua (detalle) */
 }
 
-/* Encabezado */
-.encabezado {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: #003049;
+*{ box-sizing: border-box }
+html,body{
+  margin:0; padding:0;
+  color: var(--text);
+  background:
+    radial-gradient(90% 70% at 50% 0%, var(--bg-2) 0%, var(--bg) 60%) fixed;
+  font-family: Rubik, system-ui, Segoe UI, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.container{ width:min(1100px, 92%); margin:auto }
+
+/* 2) Header */
+.site-header{
+  position: sticky; top: 0; z-index: 40;
+  background: rgba(0, 26, 39, .92);
+  backdrop-filter: saturate(120%) blur(6px);
+  border-bottom: 2px solid var(--accent);
+}
+.site-header .container{
+  height: 70px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.brand{ display:flex; align-items:center; gap:.6rem; text-decoration:none }
+.brand-logo{ width: 36px; height: 36px; object-fit: contain;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,.35));
+}
+.brand-text{
+  font-family: WoodWorks, Rubik, system-ui, sans-serif;
+  font-weight: 900; letter-spacing:.6px; font-size: 1.2rem; color: #fff;
+}
+
+/* Nav */
+.nav{ display:flex; gap:1rem; align-items:center }
+.nav a{
+  color: #bfe7e1; text-decoration:none; padding:.35rem .55rem; border-radius:.5rem;
+  font-weight:600;
+}
+.nav a:hover{ color:#eafffb; background: rgba(255,255,255,.08) }
+
+/* 3) Hero */
+.hero{
+  position: relative; isolation: isolate;
+  padding: 4.5rem 0 3rem;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+  background:
+    radial-gradient(80% 60% at 50% 0%, #053048 0%, transparent 70%);
+}
+.hero-inner h1{
+  font-family: WoodWorks, Rubik, system-ui, sans-serif;
+  font-weight: 900;
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  letter-spacing: .5px;
+  line-height: 1.05;
   color: #fff;
-  padding: 15px;
-  border-radius: 8px;
-  margin-bottom: 20px;
+  margin: 0 0 .25rem;
+  text-shadow: 0 2px 6px rgba(0,0,0,.6);
 }
-/* 2) Uso la fuente en títulos y encabezado */
-.encabezado h1,
-section h2 {
-  font-family: 'WoodWorks Plain', Arial, sans-serif; /* la tuya + respaldo */
-  letter-spacing: 1px;   /* espacio entre letras, ajustá a gusto */
+.lead{ color:#dbe7e4; font-size: clamp(1rem, 1.7vw, 1.2rem); margin:0 0 1rem }
+
+.cta-row{ margin-top:.5rem; display:flex; gap:.75rem; flex-wrap: wrap }
+.btn{
+  background: linear-gradient(180deg, var(--accent) 0%, #d96500 100%);
+  color:#fff; font-weight:800; letter-spacing:.2px;
+  padding:.7rem 1rem; border-radius:.65rem; border:none; cursor:pointer;
+  box-shadow: 0 10px 24px rgba(0,0,0,.25);
+  transition: transform .06s ease, box-shadow .15s ease, filter .15s ease;
+  display:inline-block; text-decoration:none;
+}
+.btn:hover{ transform: translateY(-2px); filter: brightness(1.05) }
+.btn:active{ transform: translateY(0) scale(.99) }
+.btn.ghost{
+  background: transparent; color:#eafffb;
+  border:1px solid rgba(255,255,255,.35)
+}
+.btn.ghost:hover{ background: rgba(255,255,255,.06) }
+
+/* Logos del hero */
+.hero-logos{
+  display:flex; gap:1.25rem; align-items:center; justify-content:center;
+  margin-top: 1.25rem;
+}
+.hero-logos img{
+  height: 72px; width: auto; object-fit: contain;
+  filter: drop-shadow(0 3px 10px rgba(0,0,0,.5));
+}
+@media (max-width:520px){ .hero-logos img{ height: 54px } }
+
+/* Marca de agua sutil */
+.watermark{
+  position:absolute; inset:auto 0 -40px 0; height: 320px; opacity:.10; pointer-events:none;
+  background:
+    radial-gradient(130px 130px at 20% 50%, var(--accent) 0 60%, transparent 65%),
+    radial-gradient(150px 150px at 45% 40%, var(--accent-2) 0 55%, transparent 60%),
+    radial-gradient(230px 230px at 70% 65%, #fff 0 30%, transparent 35%);
 }
 
-/* si querés el título aún más “presente” */
-.encabezado h1 {
-  font-size: clamp(28px, 4vw, 48px);
+/* 4) Secciones + tarjetas */
+.section{ padding: 2.25rem 0 }
+.section-title{
+  margin:0 0 1rem; font-weight:900; letter-spacing:.3px;
+  text-shadow: 0 2px 10px rgba(0,0,0,.35);
+}
+.cards{
+  display:grid; grid-template-columns:repeat(auto-fit, minmax(260px,1fr)); gap:1rem
+}
+.card{
+  background: var(--card);
+  border:1px solid rgba(255,255,255,.10);
+  border-radius: 1rem;
+  padding: 1rem;
+  box-shadow: 0 10px 24px rgba(0,0,0,.15);
+}
+.card h3{ margin:.25rem 0 .5rem }
+.card p{ color: var(--muted); margin:0 }
+
+/* 5) Galería masonry simple */
+.gallery{ columns:1; column-gap:12px }
+@media (min-width:640px){ .gallery{ columns:2 } }
+@media (min-width:960px){ .gallery{ columns:3 } }
+.g-item{ break-inside: avoid; margin: 0 0 12px }
+.g-item img{
+  width:100%; height:auto; display:block;
+  border-radius:.75rem; background:#0b1a22;
+  outline:1px solid rgba(255,255,255,.06)
 }
 
-.encabezado h1 a {
-  color: #fff;
-  text-decoration: none;
-}/* Título principal */
-.encabezado h1 {
-  font-family: 'Staatliches', sans-serif;
-  font-size: 2.5rem;
-  letter-spacing: 2px;
+/* 6) Tablas (Grupos) */
+table{ width:100%; border-collapse: collapse; margin-top:.5rem; font-size:.98rem }
+th, td{ padding:.65rem .5rem; text-align:left }
+thead th{
+  color:#fff; font-weight:800;
+  border-bottom: 1px solid rgba(255,255,255,.18)
 }
+tbody tr{ border-bottom:1px solid rgba(255,255,255,.08) }
+tbody tr:nth-child(odd){ background: rgba(255,255,255,.03) }
+tbody tr:hover{ background: rgba(255,255,255,.06) }
+td a{ color: #74f0e4; font-weight:600 }
+td a:hover{ text-decoration: underline }
 
-
-/* Secciones */
-section {
-  margin: 30px 0;
-  padding: 20px;
-  background: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-
-section h2 {
-  margin-top: 0;
-  text-align: center;
-  color: #003049;
-  font-size: 1.6rem;
-}
-
-/* Tarjetas de grupos */
-.grupos-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 15px;
-  margin-top: 15px;
-}
-
-.grupo-card {
-  background: #caf0f8;
-  padding: 15px;
-  border-radius: 8px;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
-}
-
-/* Blog */
-.entrada-card {
-  background: #f8f9fa;
-  padding: 15px;
-  border-radius: 8px;
-  margin: 15px 0;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
-}
-
-.entrada-card h3 {
-  margin-top: 0;
-  color: #0077b6;
-}
-
-/* Botones */
-.boton {
-  display: inline-block;
-  background: #0077b6;
-  color: #fff;
-  padding: 10px 20px;
-  border-radius: 6px;
-  text-decoration: none;
-  margin-top: 10px;
-  transition: background 0.3s;
-}
-
-.boton:hover {
-  background: #005f87;
-}
-/* Limitar ancho de párrafos y contenido */
-.container p {
-  max-width: 700px;      /* ancho máximo de las líneas */
-  line-height: 1.6;      /* más aire entre líneas */
-  margin: 0 auto 1em;    /* centrado con margen abajo */
-  color: #222;           /* texto oscuro para leer mejor */
-}
-/* Logos del encabezado */
-.encabezado img {
-  height: 150px;       /* tamaño más grande */
-  max-height: 180px;  /* límite por si se desborda */
-}
-/* Enlaces útiles y redes en formato de botones */
-section ul {
-  list-style: none;
-  padding: 0;
-  text-align: center;
-}
-
-section ul li {
-  display: inline-block;
-  margin: 10px;
-}
-
-section ul li a {
-  display: inline-block;
-  padding: 12px 20px;
-  border-radius: 8px;
-  background: #0077b6;
-  color: #fff;
-  text-decoration: none;
-  font-weight: bold;
-  transition: background 0.3s;
-}
-
-section ul li a:hover {
-  background: #023e8a;
-}
-
-/* Texto dentro de secciones claras */
-section {
-  color: #222;           /* texto gris oscuro */
-  background: #fff;      /* fondo blanco suave */
-}
-
-/* Títulos */
-section h2, section h3 {
-  color: #003049;        /* azul fuerte */
-}
-body {
-  background: pink !important;
-}
-/* --- ORDENAR HOME V2 --- */
-
-/* Contenedor general */
-.container {
-  max-width: 1000px;   /* ancho fijo para que nada se abra de más */
-  margin: auto;        /* centrado */
-  padding: 20px;
-}
-
-/* Secciones */
-section {
-  margin: 30px auto;
-  padding: 20px;
-  background: #ffffff;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-
-/* Párrafos */
-section p {
-  max-width: 700px;    /* no más largos que esto */
-  margin: 0 auto 1em;
-  line-height: 1.6;
-  color: #333;
-}
-
-/* Imágenes dentro de secciones */
-section img {
-  display: block;
-  margin: 15px auto;
-  max-width: 90%;
-  border-radius: 8px;
-}
-
-/* Mapita */
-#mapa {
+/* 7) Formularios (Agregar/Editar) */
+input, select, textarea{
   width: 100%;
-  height: 300px;
-  margin-top: 15px;
-  border-radius: 8px;
-  overflow: hidden;
+  background: #0a1a22; color: var(--text);
+  border: 1px solid rgba(255,255,255,.20);
+  outline: none; padding: .65rem .75rem; border-radius: .65rem;
+}
+input::placeholder, textarea::placeholder{ color:#93a3a0 }
+form .btn{ margin-top:.25rem }
+
+/* 8) Footer */
+.site-footer{
+  color: var(--muted); text-align:center;
+  padding: 2rem 0;
+  border-top: 1px solid rgba(255,255,255,.10)
 }
 
-/* Títulos */
-section h2 {
-  text-align: center;
-  margin-bottom: 15px;
-  font-family: 'Staatliches', sans-serif;
-  color: #003049;
-}
+/* 9) Enlaces globales */
+a{ color:#74f0e4; text-decoration:none }
+a:hover{ color:#9bf7ee; text-decoration: underline }
 
-/* Grilla de grupos */
-.grupos-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 20px;
-}
-
-.grupo-card {
-  background: #caf0f8;
-  padding: 15px;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-}
-
-/* Entradas de blog */
-.entrada-card {
-  background: #f8f9fa;
-  padding: 15px;
-  border-radius: 8px;
-  margin: 15px auto;
-  max-width: 800px;
-  box-shadow: 0 1px 5px rgba(0,0,0,0.1);
-}
-body {
-  background: orange !important;
-}
-/* ====== Layout 2 columnas ====== */
-.layout {
-  display: grid;
-  grid-template-columns: 2fr 1fr; /* izquierda más ancha */
-  gap: 24px;
-}
-
-.card {
-  background: #fff;
-  color: #222;
-  border-radius: 12px;
-  padding: 18px;
-  box-shadow: 0 2px 10px rgba(0,0,0,.08);
-}
-
-.muted { color:#666; }
-.center { text-align:center; }
-
-/* Entradas */
-.entrada-card {
-  background:#f8f9fa;
-  padding:14px;
-  border-radius:10px;
-  box-shadow: 0 1px 6px rgba(0,0,0,.06);
-  margin: 12px 0;
-}
-.entrada-card h3 { margin:0 0 6px; color:#003049; }
-
-/* Mapa */
-#mapa {
-  width: 100%;
-  height: 320px;
-  border-radius: 10px;
-  overflow: hidden;
-}
-
-/* Grupos */
-.grupos-grid {
-  display:grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap:14px;
-}
-.grupo-card {
-  background:#e7f6ff;
-  border:1px solid #cfe9fb;
-  border-radius:10px;
-  padding:12px;
-}
-
-/* Botón común */
-.btn {
-  display:inline-block;
-  background:#0077b6;
-  color:#fff; text-decoration:none;
-  padding:10px 16px; border-radius:8px;
-  font-weight:700;
-}
-.btn:hover { background:#005f87; }
-
-/* Enlaces de la derecha */
-.link-list { list-style:none; padding:0; margin:0; }
-.link-list li { margin:8px 0; }
-.link-list a { color:#0077b6; font-weight:600; text-decoration:none; }
-.link-list a:hover { text-decoration:underline; }
-
-/* Botones de redes grandes */
-.social-grid { display:grid; gap:10px; }
-.social {
-  display:block; text-align:center; padding:12px 10px;
-  border-radius:10px; font-weight:700; color:#fff; text-decoration:none;
-}
-.social.instagram { background:#E4405F; }
-.social.facebook  { background:#1877F2; }
-.social:hover { filter: brightness(0.92); }
-
-/* Logos del header (sin inline) */
-.encabezado .logo { height: 120px; width:auto; max-height: 18vh; }
-.encabezado { display:flex; align-items:center; justify-content:space-between; background:#003049; color:#fff; padding:14px; border-radius:10px; margin-bottom:18px; }
-.encabezado h1 { margin:0; font-family:'Staatliches', sans-serif; letter-spacing:2px; }
-.encabezado h1 a { color:#fff; text-decoration:none; }
-
-/* Tipos y contenedor */
-.container { max-width: 1100px; margin:auto; padding:20px; }
-section h2 { text-align:center; color:#003049; font-family:'Staatliches', sans-serif; }
-
-/* Responsive: en celus, una sola columna */
-@media (max-width: 900px) {
-  .layout { grid-template-columns: 1fr; }
-  .encabezado .logo { height: 90px; }
-}
+/* 10) Utilidades */
+.hidden{ display:none !important }
+.center{ text-align:center }
+.mt-1{ margin-top:.5rem } .mt-2{ margin-top:1rem } .mt-3{ margin-top:1.5rem }
