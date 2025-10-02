@@ -13,6 +13,10 @@ else:
     app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///grupos.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
+@app.context_processor
+def inject_current_year():
+    from datetime import datetime
+    return {"current_year": datetime.utcnow().year}
 
 # --- Modelo ---
 class GrupoScout(db.Model):
