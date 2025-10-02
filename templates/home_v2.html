@@ -1,23 +1,22 @@
 {% extends "base.html" %}
-{% block title %}PIOVERTADAS — Inicio{% endblock %}
+{% block title %}Inicio — PIOVERTADAS{% endblock %}
 {% block head %}{{ super() }}{% endblock %}
 
 {% block content %}
 <section class="hero">
   <div class="hero-inner container">
-    <h1>Bienvenidos a PIOVERTADAS</h1>
+    <h1>Bienvenidos</h1>
     <p class="lead">Red Aeronaval con cabeza patagónica.</p>
     <div class="cta-row">
       <a class="btn" href="{{ url_for('galeria') }}">Ver galería</a>
       <a class="btn ghost" href="{{ url_for('materiales') }}">Materiales</a>
       <a class="btn" href="{{ url_for('ver_grupos') }}">Grupos</a>
     </div>
-    <div class="hero-logos">
-  <img src="{{ url_for('static', filename='backgrounds/escudo.png') }}" alt="Escudo" />
-  <img src="{{ url_for('static', filename='backgrounds/logopromesa.png') }}" alt="Promesa" />
-</div>
-
   </div>
+
+  {# QUITAMOS LOS LOGOS DEL HÉROE #}
+  {# <div class="hero-logos"> ... </div> #}
+
   <div class="watermark" aria-hidden="true"></div>
 </section>
 
@@ -31,4 +30,3 @@
   </div>
 </section>
 {% endblock %}
-
