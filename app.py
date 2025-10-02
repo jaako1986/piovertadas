@@ -86,3 +86,8 @@ def editar_grupo(id):
 
 if __name__ == "__main__":
     app.run(debug=True)
+from datetime import datetime
+
+@app.route("/")
+def home():
+    return render_template("home_v2.html", now=datetime.now())
