@@ -91,3 +91,46 @@ def editar_grupo(id):
 
 if __name__ == "__main__":
     app.run(debug=True)
+# routes.py o app.py (donde tengas tus rutas)
+import os
+from flask import Flask, render_template
+from markupsafe import Markup
+
+app = Flask(__name__)
+
+def obtener_entradas():
+    entradas_dir = os.path.join(app.static_folder, 'entradas')
+    archivos = [f for f in os.listdir(entradas_dir) if f.endswith('.html')]
+    # ordenar por nombre (si tus archivos empiezan con fecha YYYY-MM-DD quedará ordenado)
+    archivos.sort(reverse=True)  # más reciente primero
+    lista = []
+    for nombre in archivos:
+        ruta = os.path.join(entradas_dir, nombre)
+        with open(ruta, 'r', encoding='utf-8') as f:
+            contenido = f.read()
+        # parseo seguro del nombre: asumo formato "YYYY-MM-DD-mi-titulo.html"
+        base = nombre[:-5]  # quita .html
+        partes = base.split('-', 3)  # separa en como máximo 4 partes
+        # si el título tiene más guiones, lo juntamos
+        if len(partes) >= 3:
+            fecha = partes[0]  # "YYYY"
+            # si tu formato real es "YYYY-MM-DD" te conviene:
+            # fecha = base[:10]
+            fecha = base[:10] if len(base) >= 10 else ''
+            titulo = base[11:].replace('-', ' ').capitalize() if len(base) > 11 else base
+        else:
+            # fallback
+            fecha = ''
+            titulo = base.replace('-', ' ').capitalize()
+        lista.append({
+            'archivo': nombre,
+            'fecha': fecha,
+            'titulo': titulo,
+            'contenido': Markup(contenido)  # lo marcamos como safe porque son tus html
+        })
+    return lista
+
+@app.route('/blog')
+def blog():
+    entradas = obtener_entradas()
+    return render_template('blog.html', entradas=entradas)
