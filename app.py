@@ -45,7 +45,11 @@ with app.app_context():
 # ----------------------------------------------------
 @app.route("/")
 def home():
-    return render_template("home_v2.html", now=datetime.now())
+    entradas = obtener_entradas()
+    # Mostramos solo las 3 más nuevas (si querés todas, sacá [:3])
+    ultimas = entradas
+    return render_template("home_v2.html", now=datetime.now(), entradas=ultimas)
+
 
 @app.route("/galeria")
 def galeria():

@@ -331,3 +331,19 @@ td a:hover{ text-decoration: underline }
   filter: drop-shadow(0 2px 5px rgba(0,0,0,.4));
 }
 
+.blog-resumen {
+    margin: 2rem auto;
+    max-width: 800px;
+}
+
+.entrada-resumen h3 {
+    margin-bottom: 0.2rem;
+}
+
+.entrada-resumen small {
+    color: #777;
+}
+
+.contenido-resumen {
+    margin: 0.5rem 0 1rem 0;
+}
