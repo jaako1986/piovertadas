@@ -347,3 +347,21 @@ td a:hover{ text-decoration: underline }
 .contenido-resumen {
     margin: 0.5rem 0 1rem 0;
 }
+/* --- Imágenes del blog: tamaño controlado + tarjeta elegante --- */
+.blog-resumen img,
+.entrada-resumen img,
+.entrada-blog img {
+    max-width: 90%;          /* nunca ocupa todo el ancho, queda más prolijo */
+    max-height: 450px;       /* límite de altura para que no se hagan interminables */
+    height: auto;            /* mantiene proporción */
+    display: block;          /* evita espacios raros */
+    margin: 1.5rem auto;     /* centrado con aire */
+    object-fit: cover;       /* recorta suavemente si la imagen es muy alta */
+    
+    /* Tarjeta */
+    background: #ffffff;
+    padding: 8px;
+    border: 1px solid #d5d5d5;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
