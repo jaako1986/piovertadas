@@ -5,7 +5,8 @@
   <h1>Grupos registrados</h1>
   <p><a class="btn" href="{{ url_for('agregar_grupo') }}">+ Agregar grupo</a></p>
 
- <div class="table-wrap">
+{% if grupos %}
+<div class="table-wrap">
   <table>
     <thead>
       <tr>
@@ -25,9 +26,8 @@
     </tbody>
   </table>
 </div>
-
-  {% else %}
-    <p>Sin grupos por ahora.</p>
-  {% endif %}
+{% else %}
+  <p>Sin grupos por ahora.</p>
+{% endif %}
 </section>
 {% endblock %}
