@@ -6,12 +6,11 @@
   {% if fotos %}
     <div class="gallery">
       {% for ruta in fotos %}
-        <figure class="g-item">
-          <img loading="lazy"
-               src="{{ url_for('static', filename=ruta) }}"
-               alt="Foto {{ loop.index }}"
-               width="1200" height="800" />
-        </figure>
+       <a class="g-item" href="{{ url_for('static', filename=ruta) }}" target="_blank">
+  <img loading="lazy"
+       src="{{ url_for('static', filename=ruta) }}"
+       alt="Foto {{ loop.index }}">
+</a>
       {% endfor %}
     </div>
   {% else %}

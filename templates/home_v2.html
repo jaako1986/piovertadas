@@ -31,19 +31,25 @@
   <section class="blog-resumen">
   <h2>📘 Últimas Entradas</h2>
 
-  {% for e in entradas %}
+ <section class="blog-resumen">
+  <h2>📘 Últimas Entradas</h2>
+
+  {% for e in entradas[:2] %}
     <article class="entrada-resumen">
       <h3>{{ e.titulo }}</h3>
       <small>{{ e.fecha }}</small>
-    <div class="contenido-resumen">
-  <div class="entrada-contenedor">
-    {{ e.contenido|safe }}
-  </div>
-</div>
-      <a href="/blog">Ver todas</a>
-      <hr>
+
+      <p>
+        {{ e.contenido | striptags | truncate(120) }}
+      </p>
+
+      <a class="btn ghost" href="/blog">Leer más</a>
     </article>
   {% endfor %}
+
+  <div style="text-align:center; margin-top:1.5rem;">
+    <a class="btn" href="/blog">Ver todas las entradas</a>
+  </div>
 </section>
 
 </section>
