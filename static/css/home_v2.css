@@ -1,367 +1,241 @@
-/* ============================
-   PIOVERTADAS — Home v2 (FULL)
-   ============================ */
-
-/* 0) Fuente custom (si no la usás, podés borrar este bloque) */
 @font-face{
   font-family: 'WoodWorks';
   src: url('/static/fonts/WoodWorks-Plain.otf') format('opentype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
 }
 
-/* 1) Paleta y base */
 :root{
-  /* Aeronaval / Scout */
-  --bg: #002233;       /* azul petróleo oscuro */
-  --bg-2: #0b1f2c;     /* variante para degradé */
-  --card: #0e2632;     /* paneles */
-  --text: #f2f6f5;     /* texto principal */
-  --muted: #bcd0cc;    /* texto secundario */
-  --accent: #f77f00;   /* naranja (cta) */
-  --accent-2: #2a9d8f; /* verde agua (detalle) */
+  --bg: #0b1f2c;
+  --bg-2: #081821;
+  --card: #122c3a;
+  --text: #e8f1ef;
+  --muted: #9fb7b2;
+  --accent: #f77f00;
 }
 
-*{ box-sizing: border-box }
-html,body{
-  margin:0; padding:0;
+*{ box-sizing: border-box; }
+
+body{
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(180deg, var(--bg), var(--bg-2));
   color: var(--text);
-  background:
-    radial-gradient(90% 70% at 50% 0%, var(--bg-2) 0%, var(--bg) 60%) fixed;
-  font-family: Rubik, system-ui, Segoe UI, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
 }
-.container{ width:min(1100px, 92%); margin:auto }
 
-/* 2) Header */
+.container{
+  width: 92%;
+  max-width: 1400px;
+  margin: auto;
+}
+
+/* HEADER */
 .site-header{
-  position: sticky; top: 0; z-index: 40;
-  background: rgba(0, 26, 39, .92);
-  backdrop-filter: saturate(120%) blur(6px);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(8, 24, 33, 0.95);
   border-bottom: 2px solid var(--accent);
 }
+
 .site-header .container{
-  height: 70px;
-  display: flex; align-items: center; justify-content: space-between;
-}
-.brand{ display:flex; align-items:center; gap:.6rem; text-decoration:none }
-.brand-logo{ width: 36px; height: 36px; object-fit: contain;
-  filter: drop-shadow(0 2px 6px rgba(0,0,0,.35));
-}
-.brand-text{
-  font-family: WoodWorks, Rubik, system-ui, sans-serif;
-  font-weight: 900; letter-spacing:.6px; font-size: 1.2rem; color: #fff;
-}
-
-/* Nav */
-.nav{ display:flex; gap:1rem; align-items:center }
-.nav a{
-  color: #bfe7e1; text-decoration:none; padding:.35rem .55rem; border-radius:.5rem;
-  font-weight:600;
-}
-.nav a:hover{ color:#eafffb; background: rgba(255,255,255,.08) }
-
-/* 3) Hero */
-.hero{
-  position: relative; isolation: isolate;
-  padding: 4.5rem 0 3rem;
-  border-bottom: 1px solid rgba(255,255,255,.08);
-  background:
-    radial-gradient(80% 60% at 50% 0%, #053048 0%, transparent 70%);
-}
-.hero-inner h1{
-  font-family: WoodWorks, Rubik, system-ui, sans-serif;
-  font-weight: 900;
-  font-size: clamp(2.4rem, 5vw, 4rem);
-  letter-spacing: .5px;
-  line-height: 1.05;
-  color: #fff;
-  margin: 0 0 .25rem;
-  text-shadow: 0 2px 6px rgba(0,0,0,.6);
-}
-.lead{ color:#dbe7e4; font-size: clamp(1rem, 1.7vw, 1.2rem); margin:0 0 1rem }
-
-.cta-row{ margin-top:.5rem; display:flex; gap:.75rem; flex-wrap: wrap }
-.btn{
-  background: linear-gradient(180deg, var(--accent) 0%, #d96500 100%);
-  color:#fff; font-weight:800; letter-spacing:.2px;
-  padding:.7rem 1rem; border-radius:.65rem; border:none; cursor:pointer;
-  box-shadow: 0 10px 24px rgba(0,0,0,.25);
-  transition: transform .06s ease, box-shadow .15s ease, filter .15s ease;
-  display:inline-block; text-decoration:none;
-}
-.btn:hover{ transform: translateY(-2px); filter: brightness(1.05) }
-.btn:active{ transform: translateY(0) scale(.99) }
-.btn.ghost{
-  background: transparent; color:#eafffb;
-  border:1px solid rgba(255,255,255,.35)
-}
-.btn.ghost:hover{ background: rgba(255,255,255,.06) }
-
-/* Logos del hero */
-.hero-logos{
-  display:flex; gap:1.25rem; align-items:center; justify-content:center;
-  margin-top: 1.25rem;
-}
-.hero-logos img{
-  height: 72px; width: auto; object-fit: contain;
-  filter: drop-shadow(0 3px 10px rgba(0,0,0,.5));
-}
-@media (max-width:520px){ .hero-logos img{ height: 54px } }
-
-/* Marca de agua sutil */
-.watermark{
-  position:absolute; inset:auto 0 -40px 0; height: 320px; opacity:.10; pointer-events:none;
-  background:
-    radial-gradient(130px 130px at 20% 50%, var(--accent) 0 60%, transparent 65%),
-    radial-gradient(150px 150px at 45% 40%, var(--accent-2) 0 55%, transparent 60%),
-    radial-gradient(230px 230px at 70% 65%, #fff 0 30%, transparent 35%);
-}
-
-/* 4) Secciones + tarjetas */
-.section{ padding: 2.25rem 0 }
-.section-title{
-  margin:0 0 1rem; font-weight:900; letter-spacing:.3px;
-  text-shadow: 0 2px 10px rgba(0,0,0,.35);
-}
-.cards{
-  display:grid; grid-template-columns:repeat(auto-fit, minmax(260px,1fr)); gap:1rem
-}
-.card{
-  background: var(--card);
-  border:1px solid rgba(255,255,255,.10);
-  border-radius: 1rem;
-  padding: 1rem;
-  box-shadow: 0 10px 24px rgba(0,0,0,.15);
-}
-.card h3{ margin:.25rem 0 .5rem }
-.card p{ color: var(--muted); margin:0 }
-
-/* 5) Galería masonry simple */
-.gallery{ columns:1; column-gap:12px }
-@media (min-width:640px){ .gallery{ columns:2 } }
-@media (min-width:960px){ .gallery{ columns:3 } }
-.g-item{ break-inside: avoid; margin: 0 0 12px }
-.g-item img{
-  width:100%; height:auto; display:block;
-  border-radius:.75rem; background:#0b1a22;
-  outline:1px solid rgba(255,255,255,.06)
-}
-
-/* 6) Tablas (Grupos) */
-table{ width:100%; border-collapse: collapse; margin-top:.5rem; font-size:.98rem }
-th, td{ padding:.65rem .5rem; text-align:left }
-thead th{
-  color:#fff; font-weight:800;
-  border-bottom: 1px solid rgba(255,255,255,.18)
-}
-tbody tr{ border-bottom:1px solid rgba(255,255,255,.08) }
-tbody tr:nth-child(odd){ background: rgba(255,255,255,.03) }
-tbody tr:hover{ background: rgba(255,255,255,.06) }
-td a{ color: #74f0e4; font-weight:600 }
-td a:hover{ text-decoration: underline }
-
-/* 7) Formularios (Agregar/Editar) */
-input, select, textarea{
-  width: 100%;
-  background: #0a1a22; color: var(--text);
-  border: 1px solid rgba(255,255,255,.20);
-  outline: none; padding: .65rem .75rem; border-radius: .65rem;
-}
-input::placeholder, textarea::placeholder{ color:#93a3a0 }
-form .btn{ margin-top:.25rem }
-
-/* 8) Footer */
-.site-footer{
-  color: var(--muted); text-align:center;
-  padding: 2rem 0;
-  border-top: 1px solid rgba(255,255,255,.10)
-}
-
-/* 9) Enlaces globales */
-a{ color:#74f0e4; text-decoration:none }
-a:hover{ color:#9bf7ee; text-decoration: underline }
-
-/* 10) Utilidades */
-.hidden{ display:none !important }
-.center{ text-align:center }
-.mt-1{ margin-top:.5rem } .mt-2{ margin-top:1rem } .mt-3{ margin-top:1.5rem }
-/* ===== Ajustes pedidos ===== */
-
-/* 3.1 Layout header: nav al medio, logos a la derecha */
-.site-header .container{ display:flex; align-items:center; gap:1rem }
-.nav{ margin-left:auto; display:flex; gap:1rem; align-items:center }
-.header-logos{
-  display:flex; flex-direction:column; align-items:flex-end; gap:6px;
-  margin-left: .5rem;
-}
-.logo-grupo{ height: 44px; width:auto; object-fit:contain; filter: drop-shadow(0 2px 6px rgba(0,0,0,.35)); }
-.logo-asa{   height: 30px; width:auto; object-fit:contain; opacity:.95; }
-
-/* 3.2 Ocultar logos del héroe (los movimos al header) */
-.hero-logos{ display:none !important; }
-
-/* 3.3 H1 con tono madera para que se note la textura (no blanco) */
-.hero-inner h1{
-  /* Fallback color “madera” */
-  color: #f1e2c4;
-  /* Gradiente sutil para realzar vetas */
-  background: linear-gradient(180deg, #f6e7c9 0%, #e7c999 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-shadow: 0 2px 5px rgba(0,0,0,.45);
-  letter-spacing: .2px;
-}
-
-/* 3.4 Eliminar repetición del nombre: el brand del header manda */
-.brand-text{ font-size: 1.15rem; }
-
-/* 3.5 Estado activo en nav, para orientación */
-.nav a.active{
-  background: rgba(255,255,255,.18);
-  color:#fff;
-  box-shadow: inset 0 -2px 0 var(--accent);
-}
-
-/* 3.6 Tuning general (menos “WordArt”) */
-.watermark{ opacity:.07; height:280px }
-/* ===== HEADER LIMPIO (1 logo izq, nav der) ===== */
-.site-header{
-  position: sticky; top:0; z-index:40;
-  background: rgba(0,26,39,.95);
-  backdrop-filter: saturate(120%) blur(6px);
-  border-bottom: 2px solid var(--accent);
-}
-.site-header .container{
-  height: 70px; display:flex; align-items:center; justify-content:space-between; gap:1rem;
-}
-.brand{ display:flex; align-items:center; gap:.6rem; text-decoration:none }
-.brand-logo{ width:40px; height:40px; object-fit:contain; filter: drop-shadow(0 2px 6px rgba(0,0,0,.35)); }
-.brand-text{
-  font-family: WoodWorks, Rubik, system-ui, sans-serif;
-  font-weight: 900; letter-spacing:.6px; font-size: 1.25rem; color:#fff;
-}
-.nav{ display:flex; gap:1rem; align-items:center; margin-left:auto }
-.nav a{
-  color:#d7f3ef; text-decoration:none; padding:.4rem .7rem; border-radius:.6rem; font-weight:700;
-}
-.nav a:hover{ color:#ffffff; background: rgba(255,255,255,.10) }
-.nav a.active{
-  background: rgba(255,255,255,.18); color:#fff; box-shadow: inset 0 -2px 0 var(--accent);
-}
-
-/* ==== QUITAR LOGOS FLOTANTES DEL HÉROE / HEADER ==== */
-.hero-logos, .header-logos{ display:none !important; }
-
-/* ===== TITULAR SIN “WORDART” Y SIN DUPLICAR MARCA ===== */
-.hero-inner h1{
-  color:#f1e2c4;
-  background: linear-gradient(180deg, #f6e7c9 0%, #e7c999 100%);
-  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
-  text-shadow: 0 2px 5px rgba(0,0,0,.45); letter-spacing:.2px;
-}
-
-/* ===== BOTONES UNIFICADOS (naranja consistente) ===== */
-.btn{
-  background: linear-gradient(180deg, var(--accent) 0%, #d96500 100%);
-  color:#fff; font-weight:800; border:none; border-radius:.65rem;
-  box-shadow: 0 10px 24px rgba(0,0,0,.25);
-}
-.btn.ghost{
-  background: transparent; color:#eafffb; border:1.5px solid rgba(255,255,255,.55);
-}
-
-/* ===== TABLA PRO (Grupos) ===== */
-.table-wrap{ overflow:auto; border-radius: .8rem; border:1px solid rgba(255,255,255,.10); background: rgba(255,255,255,.02) }
-table{ width:100%; border-collapse:collapse; font-size: .98rem }
-thead th{
-  text-align:left; padding:.8rem .7rem; font-weight:900; color:#fff;
-  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
-  border-bottom: 1px solid rgba(255,255,255,.18);
-}
-tbody td{ padding:.75rem .7rem; border-bottom:1px solid rgba(255,255,255,.08) }
-tbody tr:nth-child(odd){ background: rgba(255,255,255,.03) }
-tbody tr:hover{ background: rgba(255,255,255,.06) }
-td a{ color:#74f0e4; font-weight:700 }
-td a:hover{ text-decoration: underline }
-
-/* ===== FOOTER ORDENADO (ASA) ===== */
-.site-footer{ border-top:1px solid rgba(255,255,255,.10); padding: 1.25rem 0; color: var(--muted) }
-.footer-grid{ display:flex; align-items:center; justify-content:space-between; gap:1rem }
-.footer-logos img{ height:28px; width:auto; opacity:.95; filter: drop-shadow(0 2px 6px rgba(0,0,0,.3)); }
-/* ==== AJUSTES EXTRA PARA LIMPIAR ==== */
-
-/* Header: solo logo + texto */
-.brand-logo { width: 44px; height: 44px; }
-.brand-text { font-size: 1.3rem; color: #fff; }
-
-/* Eliminar logos repetidos */
-.hero-logos, .header-logos { display: none !important; }
-
-/* Hero title más “madera” */
-.hero-inner h1 {
-  font-family: WoodWorks, Rubik, sans-serif;
-  font-size: clamp(2.6rem, 5vw, 4.2rem);
-  font-weight: 900;
-  background: linear-gradient(180deg, #caa974 0%, #8c6239 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-shadow: 0 3px 7px rgba(0,0,0,.6);
-  margin-bottom: .5rem;
-}
-
-/* Footer: sello ASA */
-.site-footer {
-  border-top: 1px solid rgba(255,255,255,.15);
-  padding: 1.5rem 0;
-}
-.footer-grid {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  height: 70px;
+}
+
+.brand{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand-logo{ height: 44px; }
+
+.brand-text{
+  font-family: WoodWorks, sans-serif;
+  font-size: 1.2rem;
+  font-weight: 900;
+}
+
+.nav{
+  display: flex;
   gap: 1rem;
 }
-.footer-logos img {
-  height: 32px;
-  opacity: .95;
-  filter: drop-shadow(0 2px 5px rgba(0,0,0,.4));
+
+.nav a{
+  color: #cfe9e5;
+  text-decoration: none;
+  font-weight: 600;
+  padding: .4rem .6rem;
+  border-radius: 6px;
 }
 
-.blog-resumen {
-    margin: 2rem auto;
-    max-width: 800px;
+.nav a:hover{
+  background: rgba(255,255,255,0.08);
+  color: #fff;
 }
 
-.entrada-resumen h3 {
-    margin-bottom: 0.2rem;
+/* HERO */
+.hero{
+  padding: 4rem 0 3rem;
+  text-align: center;
 }
 
-.entrada-resumen small {
-    color: #777;
+.hero-inner h1{
+  font-family: WoodWorks, sans-serif;
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  margin: 0;
 }
 
-.contenido-resumen {
-    margin: 0.5rem 0 1rem 0;
+.lead{
+  color: var(--muted);
+  margin-top: .5rem;
 }
-/* --- Imágenes del blog: tamaño controlado + tarjeta elegante --- */
-.blog-resumen img,
-.entrada-resumen img,
-.entrada-blog img {
-    max-width: 90%;          /* nunca ocupa todo el ancho, queda más prolijo */
-    max-height: 450px;       /* límite de altura para que no se hagan interminables */
-    height: auto;            /* mantiene proporción */
-    display: block;          /* evita espacios raros */
-    margin: 1.5rem auto;     /* centrado con aire */
-    object-fit: cover;       /* recorta suavemente si la imagen es muy alta */
-    
-    /* Tarjeta */
-    background: #ffffff;
-    padding: 8px;
-    border: 1px solid #d5d5d5;
-    border-radius: 10px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+
+/* BOTONES */
+.cta-row{
+  margin-top: 1.2rem;
+  display: flex;
+  justify-content: center;
+  gap: .8rem;
+  flex-wrap: wrap;
+}
+
+.btn{
+  background: var(--accent);
+  color: white;
+  padding: .7rem 1rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.btn:hover{ filter: brightness(1.1); }
+
+.btn.ghost{
+  background: transparent;
+  border: 1px solid rgba(255,255,255,.4);
+}
+
+/* SECCIONES */
+.section{ padding: 2.5rem 0; }
+
+.section-title{
+  margin-bottom: 1rem;
+  font-weight: 800;
+}
+
+/* BLOG CONTENEDOR (ANCHO REAL) */
+.blog-resumen,
+.blog-contenedor{
+  width: 100%;
+  max-width: 1200px;
+  margin: 2rem auto;
+}
+
+/* ENTRADAS */
+.entrada-blog,
+.entrada-resumen{
+  margin-bottom: 2.5rem;
+}
+
+/* CONTENIDO INTERNO (ACA ESTABA EL PROBLEMA) */
+.contenido,
+.contenido-resumen{
+  width: 100%;
+}
+
+/* BLOQUE IMAGEN + TEXTO */
+.entrada-con-imagen{
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 2rem;
+  align-items: center;
+  width: 100%;
+  margin: 2rem 0;
+}
+
+/* IMAGEN */
+.entrada-con-imagen img{
+  width: 100%;
+  height: auto;
+  max-height: 260px;
+  object-fit: contain;
+  border-radius: 6px;
+}
+
+/* TEXTO */
+.texto-entrada{
+  line-height: 1.6;
+}
+
+/* VARIAS IMÁGENES → CUADRÍCULA */
+.imagenes-grid{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: .5rem;
+}
+
+.imagenes-grid img{
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  border-radius: 6px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px){
+  .entrada-con-imagen{
+    grid-template-columns: 1fr;
+  }
+}
+
+/* CARDS */
+.cards{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
+  gap: 1rem;
+}
+
+.card{
+  background: var(--card);
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+.card p{ color: var(--muted); }
+
+/* GALERIA */
+.gallery{
+  columns: 1;
+  column-gap: 12px;
+}
+
+@media (min-width:640px){ .gallery{ columns: 2; } }
+@media (min-width:960px){ .gallery{ columns: 3; } }
+
+.g-item{ break-inside: avoid; margin-bottom: 12px; }
+
+.g-item img{
+  width: 100%;
+  border-radius: 8px;
+}
+
+/* FORM */
+input, textarea{
+  width: 100%;
+  padding: .6rem;
+  background: #0a1a22;
+  border: 1px solid rgba(255,255,255,.2);
+  color: white;
+  border-radius: 6px;
+}
+
+/* FOOTER */
+.site-footer{
+  text-align: center;
+  padding: 2rem 0;
+  color: var(--muted);
+  border-top: 1px solid rgba(255,255,255,.1);
 }

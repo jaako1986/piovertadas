@@ -1,0 +1,39 @@
+<article class="entrada-modelo">
+
+  <!-- BLOQUE PRINCIPAL -->
+  <div class="entrada-con-imagen">
+
+    <img src="/static/fotos/imagen-principal.jpg" alt="Imagen principal">
+
+    <div class="texto-entrada">
+      <h4>Subtítulo breve</h4>
+
+      <p>
+        Arrancás con un párrafo corto que cuente qué pasó. Nada de testamento.
+      </p>
+
+      <p>
+        Segundo párrafo, complementa la idea. Siempre en bloques chicos.
+      </p>
+
+    </div>
+  </div>
+
+  <!-- BLOQUE SECUNDARIO (TEXTO SOLO) -->
+  <div class="texto-entrada">
+    <h4>Otro momento</h4>
+
+    <p>
+      Acá desarrollás un poco más. Pero seguí cortando en párrafos, no amontones.
+    </p>
+  </div>
+
+  <!-- GALERÍA -->
+  <div class="imagenes-grid">
+    <img src="/static/fotos/foto1.jpg" alt="">
+    <img src="/static/fotos/foto2.jpg" alt="">
+    <img src="/static/fotos/foto3.jpg" alt="">
+    <img src="/static/fotos/foto4.jpg" alt="">
+  </div>
+
+</article>
