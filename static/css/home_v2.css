@@ -57,6 +57,15 @@ body{
   font-size: 1.2rem;
   font-weight: 900;
 }
+.btn-card{
+  text-decoration: none;
+  color: inherit;
+  transition: transform .15s ease;
+}
+
+.btn-card:hover{
+  transform: translateY(-4px);
+}
 
 .nav{
   display: flex;
@@ -78,19 +87,30 @@ body{
 
 /* HERO */
 .hero{
-  padding: 4rem 0 3rem;
+  position: relative;
+  padding: 7rem 0 6rem;
   text-align: center;
+
+  background:
+    linear-gradient(rgba(4,28,34,.75), rgba(4,28,34,.88)),
+    url('/static/backgrounds/fogon-hero.jpg');
+
+  background-size: cover;
+  background-position: center;
+}
+
+.hero-inner{
+  max-width: 850px;
+  margin: auto;
 }
 
 .hero-inner h1{
-  font-family: WoodWorks, sans-serif;
-  font-size: clamp(2.5rem, 6vw, 4rem);
-  margin: 0;
+  text-shadow: 0 4px 12px rgba(0,0,0,.6);
 }
 
 .lead{
-  color: var(--muted);
-  margin-top: .5rem;
+  font-size: 1.15rem;
+  color: #d9e7e3;
 }
 
 /* BOTONES */
@@ -229,6 +249,29 @@ body{
   overflow: hidden;
   border-radius: 8px;
 }
+.bitacora{
+  background:
+    linear-gradient(rgba(0,0,0,.25), rgba(0,0,0,.25)),
+    url('/static/backgrounds/papel-textura.jpg');
+
+  background-size: cover;
+  border-left: 4px solid var(--accent);
+}
+
+.bitacora h2{
+  font-family: WoodWorks, sans-serif;
+  font-size: 2rem;
+  margin-top: 0;
+}
+
+.bitacora p{
+  color: #d7e4e1;
+  line-height: 1.7;
+}
+
+.btn-card h3{
+  margin-top: 0;
+}
 
 /* IMG */
 .g-item img{
@@ -242,7 +285,6 @@ body{
   transform: scale(1.05);
   transition: .2s;
 }
-.
 
 
 /* FORM */
@@ -261,4 +303,32 @@ input, textarea{
   padding: 2rem 0;
   color: var(--muted);
   border-top: 1px solid rgba(255,255,255,.1);
+}
+.mapa-home{
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+.mapa-texto h2{
+  margin-top: 0;
+}
+
+#mapa{
+  width: 100%;
+  height: 380px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* celular */
+@media (max-width: 900px){
+  .mapa-home{
+    grid-template-columns: 1fr;
+  }
+
+  #mapa{
+    height: 300px;
+  }
 }

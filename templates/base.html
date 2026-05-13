@@ -28,9 +28,50 @@
     <div class="footer-grid">
       <p>© {{ current_year }} Grupo Scouts Aeronavales “Islas Malvinas” Base VIII</p>
       <div class="footer-logos">
-        <img src="{{ url_for('static', filename='backgrounds/logoASA.png') }}" alt="Logo ASA">
+        <img src="{{ url_for('static', filename='backgrounds/logopromesa.png') }}" alt="Logo ASA">
       </div>
     </div>
   </footer>
+<div id="modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,.9); justify-content:center; align-items:center; z-index:1000;">
+  <img id="modal-img" style="max-width:90%; max-height:90%; border-radius:8px;">
+</div>
+
+<script>
+const modal = document.getElementById("modal");
+const modalImg = document.getElementById("modal-img");
+
+document.querySelectorAll(".g-item").forEach(el => {
+  el.addEventListener("click", e => {
+    e.preventDefault();
+    modal.style.display = "flex";
+    modalImg.src = el.href;
+  });
+});
+
+modal.addEventListener("click", () => {
+  modal.style.display = "none";
+});
+</script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<script>
+const mapa = document.getElementById("mapa");
+
+if (mapa) {
+
+  const map = L.map('mapa').setView([-45.864472, -67.480278], 13);
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap'
+  }).addTo(map);
+
+  L.marker([-45.864472, -67.480278]).addTo(map)
+    .bindPopup('Grupo Scouts Aeronavales Islas Malvinas — Comodoro Rivadavia')
+    .openPopup();
+
+}
+</script>
 </body>
 </html>
