@@ -58,7 +58,7 @@
 
   <div class="cards">
 
-  <a class="card btn-card" href="/galeria">
+  <a class="card btn-card" href="{{ url_for('galeria') }}">
     <h3>📷 Lo que fuimos haciendo</h3>
     <p>
       Campamentos, fuego, construcciones y actividades que salieron bien.
@@ -66,14 +66,14 @@
     </p>
   </a>
 
-  <a class="card btn-card" href="/material">
+  <a class="card btn-card" href="{{ url_for('materiales') }}">
     <h3>📚 Cosas útiles</h3>
     <p>
       Material scout, apuntes, PDFs y herramientas que ayudan a no improvisar tanto.
     </p>
   </a>
 
-  <a class="card btn-card" href="/grupos">
+  <a class="card btn-card" href="{{ url_for('ver_grupos') }}">
     <h3>🌎 Gente scout</h3>
     <p>
       Grupos registrados y personas que también decidieron meterse en este lío.
@@ -116,12 +116,12 @@
         {{ e.contenido | striptags | truncate(120) }}
       </p>
 
-      <a class="btn ghost" href="/blog">Leer más</a>
+      <a class="btn ghost" href="{{ url_for('blog') }}">Leer más</a>
     </article>
   {% endfor %}
 
   <div style="text-align:center; margin-top:1.5rem;">
-    <a class="btn" href="/blog">Ver todas las entradas</a>
+    <a class="btn" href="{{ url_for('blog') }}">Ver todas las entradas</a>
   </div>
 </section>
 
