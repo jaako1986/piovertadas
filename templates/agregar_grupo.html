@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}Agregar grupo — GSA Islas Malvinas{% endblock %}
+{% block title %}Registrar grupo — GSA Islas Malvinas{% endblock %}
 {% block content %}
 <style>
 .group-form-card{
@@ -11,6 +11,10 @@
   background: rgba(255,255,255,.04);
 }
 .group-form-card h1{ margin-top: 0; }
+.group-form-card p{
+  color: var(--muted);
+  line-height: 1.6;
+}
 .group-form{
   display: grid;
   gap: .75rem;
@@ -20,13 +24,14 @@
 
 <section class="section container">
   <div class="group-form-card">
-    <h1>Agregar grupo</h1>
+    <h1>Registrar grupo</h1>
+    <p>Completá los datos básicos para sumar el grupo al registro. Si después hay que corregir algo, la edición queda a cargo del administrador.</p>
     <form class="group-form" method="post">
-      <input name="nombre" placeholder="Nombre" required>
+      <input name="nombre" placeholder="Nombre del grupo" required>
       <input name="ciudad" placeholder="Ciudad" required>
       <input name="provincia" placeholder="Provincia" required>
       <input name="contacto" placeholder="Contacto (opcional)">
-      <button class="btn" type="submit">Guardar</button>
+      <button class="btn" type="submit">Registrar grupo</button>
     </form>
     <p class="form-back">
       <a href="{{ url_for('ver_grupos') }}">Volver a la lista</a>

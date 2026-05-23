@@ -125,7 +125,6 @@ def admin_logout():
 
 
 @app.route("/agregar_grupo", methods=["GET", "POST"])
-@admin_required
 def agregar_grupo():
     if request.method == "POST":
         nombre = request.form.get("nombre", "").strip()

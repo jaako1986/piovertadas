@@ -81,8 +81,8 @@
     <p>Un registro simple de grupos, ciudades y contactos para mantener cerca a la red scout sin convertir esta sección en una planilla.</p>
 
     <div class="groups-toolbar">
+      <a class="btn" href="{{ url_for('agregar_grupo') }}">Registrar grupo</a>
       {% if is_admin %}
-        <a class="btn" href="{{ url_for('agregar_grupo') }}">Agregar grupo</a>
         <a class="admin-link" href="{{ url_for('admin_logout') }}">Cerrar edición</a>
       {% elif admin_enabled %}
         <a class="admin-link" href="{{ url_for('admin_login', next=request.path) }}">Entrar como admin</a>
