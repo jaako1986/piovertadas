@@ -304,6 +304,21 @@ input, textarea{
   color: var(--muted);
   border-top: 1px solid rgba(255,255,255,.1);
 }
+
+.footer-grid{
+  display: grid;
+  justify-items: center;
+  gap: .75rem;
+}
+
+.footer-logos img{
+  display: block;
+  width: 88px;
+  max-width: 28vw;
+  height: auto;
+  border-radius: 4px;
+  opacity: .9;
+}
 .mapa-home{
   display: grid;
   grid-template-columns: 1fr 1.4fr;
