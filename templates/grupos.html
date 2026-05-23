@@ -1,33 +1,117 @@
 {% extends "base.html" %}
 {% block title %}Grupos — GSA Islas Malvinas{% endblock %}
 {% block content %}
-<section class="section container">
-  <h1>Grupos registrados</h1>
-  <p><a class="btn" href="{{ url_for('agregar_grupo') }}">+ Agregar grupo</a></p>
+<style>
+.groups-page{
+  padding-top: 3rem;
+}
+.groups-heading{
+  display: grid;
+  gap: .5rem;
+  max-width: 760px;
+  margin-bottom: 2rem;
+}
+.groups-heading h1{
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+}
+.groups-heading p{
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+.groups-toolbar{
+  display: flex;
+  gap: .75rem;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 1.25rem 0 0;
+}
+.groups-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+}
+.group-card{
+  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.025));
+  border: 1px solid rgba(255,255,255,.1);
+  border-left: 4px solid var(--accent);
+  border-radius: 8px;
+  padding: 1rem;
+  min-height: 180px;
+  display: grid;
+  gap: .75rem;
+  align-content: start;
+}
+.group-card h2{
+  margin: 0;
+  font-size: 1.15rem;
+}
+.group-meta{
+  display: grid;
+  gap: .35rem;
+  color: #d5e7e3;
+}
+.group-meta span{
+  color: var(--muted);
+  font-size: .88rem;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+.group-actions{
+  margin-top: .25rem;
+}
+.group-empty{
+  border: 1px dashed rgba(255,255,255,.25);
+  border-radius: 8px;
+  padding: 1.25rem;
+  color: var(--muted);
+}
+.admin-link{
+  color: var(--muted);
+  text-decoration: none;
+  font-size: .95rem;
+}
+.admin-link:hover{ color: white; }
+</style>
 
-{% if grupos %}
-<div class="table-wrap">
-  <table>
-    <thead>
-      <tr>
-        <th>Nombre</th><th>Ciudad</th><th>Provincia</th><th>Contacto</th><th></th>
-      </tr>
-    </thead>
-    <tbody>
+<section class="section container groups-page">
+  <div class="groups-heading">
+    <h1>Grupos scouts</h1>
+    <p>Un registro simple de grupos, ciudades y contactos para mantener cerca a la red scout sin convertir esta sección en una planilla.</p>
+
+    <div class="groups-toolbar">
+      {% if is_admin %}
+        <a class="btn" href="{{ url_for('agregar_grupo') }}">Agregar grupo</a>
+        <a class="admin-link" href="{{ url_for('admin_logout') }}">Cerrar edición</a>
+      {% elif admin_enabled %}
+        <a class="admin-link" href="{{ url_for('admin_login', next=request.path) }}">Entrar como admin</a>
+      {% endif %}
+    </div>
+  </div>
+
+  {% if grupos %}
+    <div class="groups-grid">
       {% for g in grupos %}
-      <tr>
-        <td>{{ g.nombre }}</td>
-        <td>{{ g.ciudad }}</td>
-        <td>{{ g.provincia }}</td>
-        <td>{{ g.contacto or '-' }}</td>
-        <td><a href="{{ url_for('editar_grupo', id=g.id) }}">Editar</a></td>
-      </tr>
+        <article class="group-card">
+          <h2>{{ g.nombre }}</h2>
+          <div class="group-meta">
+            <div><span>Ciudad</span><br>{{ g.ciudad }}</div>
+            <div><span>Provincia</span><br>{{ g.provincia }}</div>
+            {% if g.contacto %}
+              <div><span>Contacto</span><br>{{ g.contacto }}</div>
+            {% endif %}
+          </div>
+          {% if is_admin %}
+            <div class="group-actions">
+              <a class="btn ghost" href="{{ url_for('editar_grupo', id=g.id) }}">Editar</a>
+            </div>
+          {% endif %}
+        </article>
       {% endfor %}
-    </tbody>
-  </table>
-</div>
-{% else %}
-  <p>Sin grupos por ahora.</p>
-{% endif %}
+    </div>
+  {% else %}
+    <div class="group-empty">Todavía no hay grupos registrados.</div>
+  {% endif %}
 </section>
 {% endblock %}

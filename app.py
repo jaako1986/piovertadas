@@ -1,10 +1,15 @@
+import hmac
 import os
 from datetime import datetime
-from flask import Flask, render_template, request, redirect, url_for
+from functools import wraps
+
+from flask import Flask, abort, redirect, render_template, request, session, url_for
 from markupsafe import Markup
-from models import db, GrupoScout
+
+from models import GrupoScout, db
 
 app = Flask(__name__)
+app.secret_key = os.getenv("SECRET_KEY") or os.getenv("FLASK_SECRET_KEY") or "dev-secret-key-change-me"
 
 # CONFIG DB (Render + local)
 db_url = os.getenv("DATABASE_URL")
@@ -22,10 +27,36 @@ db.init_app(app)
 with app.app_context():
     db.create_all()
 
+
+def admin_enabled():
+    return bool(os.getenv("ADMIN_PASSWORD"))
+
+
+def is_admin():
+    return bool(session.get("is_admin"))
+
+
+def admin_required(view):
+    @wraps(view)
+    def wrapped(*args, **kwargs):
+        if not admin_enabled():
+            abort(404)
+        if not is_admin():
+            return redirect(url_for("admin_login", next=request.path))
+        return view(*args, **kwargs)
+
+    return wrapped
+
+
 # año global para templates
 @app.context_processor
-def inject_current_year():
-    return {"current_year": datetime.utcnow().year}
+def inject_template_globals():
+    return {
+        "current_year": datetime.utcnow().year,
+        "admin_enabled": admin_enabled(),
+        "is_admin": is_admin(),
+    }
+
 
 # -------------------- RUTAS --------------------
 
@@ -62,11 +93,39 @@ def materiales():
 
 @app.route("/grupos")
 def ver_grupos():
-    grupos = GrupoScout.query.order_by(GrupoScout.nombre.asc()).all()
+    grupos = GrupoScout.query.order_by(GrupoScout.provincia.asc(), GrupoScout.ciudad.asc(), GrupoScout.nombre.asc()).all()
     return render_template("grupos.html", grupos=grupos)
 
 
+@app.route("/admin/login", methods=["GET", "POST"])
+def admin_login():
+    if not admin_enabled():
+        abort(404)
+
+    error = None
+    next_url = request.args.get("next") or url_for("ver_grupos")
+    if not next_url.startswith("/"):
+        next_url = url_for("ver_grupos")
+
+    if request.method == "POST":
+        password = request.form.get("password", "")
+        expected = os.getenv("ADMIN_PASSWORD", "")
+        if hmac.compare_digest(password, expected):
+            session["is_admin"] = True
+            return redirect(next_url)
+        error = "Contraseña incorrecta."
+
+    return render_template("admin_login.html", error=error, next_url=next_url)
+
+
+@app.route("/admin/logout")
+def admin_logout():
+    session.pop("is_admin", None)
+    return redirect(url_for("ver_grupos"))
+
+
 @app.route("/agregar_grupo", methods=["GET", "POST"])
+@admin_required
 def agregar_grupo():
     if request.method == "POST":
         nombre = request.form.get("nombre", "").strip()
@@ -79,7 +138,7 @@ def agregar_grupo():
                 nombre=nombre,
                 ciudad=ciudad,
                 provincia=provincia,
-                contacto=contacto or None
+                contacto=contacto
             )
             db.session.add(nuevo)
             db.session.commit()
@@ -89,6 +148,7 @@ def agregar_grupo():
 
 
 @app.route("/editar_grupo/<int:id>", methods=["GET", "POST"])
+@admin_required
 def editar_grupo(id):
     grupo = GrupoScout.query.get_or_404(id)
 
@@ -96,7 +156,7 @@ def editar_grupo(id):
         grupo.nombre = request.form.get("nombre", grupo.nombre).strip()
         grupo.ciudad = request.form.get("ciudad", grupo.ciudad).strip()
         grupo.provincia = request.form.get("provincia", grupo.provincia).strip()
-        grupo.contacto = request.form.get("contacto", grupo.contacto)
+        grupo.contacto = request.form.get("contacto", grupo.contacto).strip()
         db.session.commit()
         return redirect(url_for("ver_grupos"))
 

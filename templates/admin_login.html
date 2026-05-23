@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Admin — GSA Islas Malvinas{% endblock %}
+{% block content %}
+<style>
+.admin-card{
+  max-width: 420px;
+  margin: 4rem auto;
+  padding: 1.25rem;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 8px;
+  background: rgba(255,255,255,.04);
+}
+.admin-card h1{ margin-top: 0; }
+.admin-form{
+  display: grid;
+  gap: .75rem;
+}
+.admin-error{
+  color: #ffb4a8;
+  margin: 0 0 .75rem;
+}
+</style>
+
+<section class="section container">
+  <div class="admin-card">
+    <h1>Edición de grupos</h1>
+    {% if error %}
+      <p class="admin-error">{{ error }}</p>
+    {% endif %}
+    <form class="admin-form" method="post" action="{{ url_for('admin_login', next=next_url) }}">
+      <input type="password" name="password" placeholder="Contraseña" autocomplete="current-password" required>
+      <button class="btn" type="submit">Entrar</button>
+    </form>
+  </div>
+</section>
+{% endblock %}
